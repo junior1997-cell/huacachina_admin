@@ -3,7 +3,7 @@
 define("DB_HOST","localhost");
 
 //Nombre de la base de datos
-define("DB_NAME", "sunat_ventas_jdl");
+define("DB_NAME", "huacachina_admin");
 
 //Usuario de la base de datos
 define("DB_USERNAME", "root");

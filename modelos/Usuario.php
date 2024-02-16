@@ -167,27 +167,12 @@ class Usuario
 	public function verificar($login, $clave)	{
 
 		$sql = "SELECT u.idusuario, u.nombre as nombre_usuario, u.apellidos as apellido_usuario, u.tipo_documento,	u.num_documento, u.telefono, 
-		u.email, u.cargo, u.imagen, u.login, 
-		e.nombre_razon_social, e.idempresa, e.nombre_comercial,	e.numero_ruc,	e.domicilio_fiscal, co.igv 
-		from usuario u 
-		inner join usuario_empresa ue on u.idusuario=ue.idusuario 
-		inner join empresa e on ue.idempresa=e.idempresa 
-		inner join configuraciones co on e.idempresa=co.idempresa 
-		where u.login='$login' and u.clave='$clave' and u.condicion='1'";
-		$user = ejecutarConsultaSimpleFila($sql); if ($user['status'] == false) {  return $user; } 
+		u.email, u.cargo, u.imagen, u.login,
+		from usuario u		
+		inner join persona p on p.idpersona=u.idpersona 
+		where u.login='$login' and u.clave='$clave' and u.estado='1'";
+		return ejecutarConsultaSimpleFila($sql); 
 
-		$id_user =  empty($user['data']) ? '' : $user['data']['idusuario'];
-
-		$sql2 = "SELECT ue.*, u.nombre as nombre_usuario, u.apellidos as apellido_usuario, e.nombre_razon_social, e.nombre_comercial, e.domicilio_fiscal, e.numero_ruc, co.igv 
-		FROM usuario_empresa as ue
-		INNER JOIN usuario AS u ON u.idusuario = ue.idusuario
-		INNER JOIN empresa as e ON e.idempresa = ue.idempresa
-		inner join configuraciones co on e.idempresa=co.idempresa 
-		WHERE ue.idusuario = '$id_user'";
-		$sucursal = ejecutarConsultaSimpleFila($sql2); if ($sucursal['status'] == false) {  return $sucursal; }
-
-		$data = [ 'status'=>true, 'message'=>'todo okey','data'=> ['usuario' => $user['data'], 'sucursal' => $sucursal['data']]  ];
-    return $data;
 	}
 
 	public function onoffTempo($st)	{
