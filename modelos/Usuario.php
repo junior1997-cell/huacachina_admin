@@ -166,28 +166,34 @@ class Usuario
 	//Funcion para verificar el acceso al sistema
 	public function verificar($login, $clave)	{
 
-		$sql = "SELECT u.idusuario, u.nombre as nombre_usuario, u.apellidos as apellido_usuario, u.tipo_documento,	u.num_documento, u.telefono, 
-		u.email, u.cargo, u.imagen, u.login,
-		from usuario u		
-		inner join persona p on p.idpersona=u.idpersona 
-		where u.login='$login' and u.clave='$clave' and u.estado='1'";
+		// var_dump($login.'  ---- '.$clave);die();
+
+		$sql = "SELECT u.idusuario, p.nombres as nombre_usuario, p.tipo_documento, p.numero_documento as num_documento, 
+		p.celular as telefono, p.correo as email, ct.nombre as cargo, p.foto_perfil as imagen, u.login 
+		from usuario u 
+		INNER JOIN persona p on p.idpersona=u.idpersona 
+		INNER JOIN cargo_trabajador ct on p.idcargo_trabajador=ct.idcargo_trabajador 
+		where u.login='$login' and u.password='$clave' and u.estado='1';";
+
 		return ejecutarConsultaSimpleFila($sql); 
+		// $info =  ejecutarConsultaSimpleFila($sql); 
+		// var_dump($info);die();
 
 	}
 
-	public function onoffTempo($st)	{
-		$sql = "UPDATE temporizador set estado='$st' where id='1' ";
-		return ejecutarConsulta($sql);
-	}
+	// public function onoffTempo($st)	{
+	// 	$sql = "UPDATE temporizador set estado='$st' where id='1' ";
+	// 	return ejecutarConsulta($sql);
+	// }
 
-	public function consultatemporizador()	{
-		$sql = "SELECT id as idtempo, tiempo, estado from temporizador where id='1' ";
-		return ejecutarConsultaSimpleFila($sql);
-	}
+	// public function consultatemporizador()	{
+	// 	$sql = "SELECT id as idtempo, tiempo, estado from temporizador where id='1' ";
+	// 	return ejecutarConsultaSimpleFila($sql);
+	// }
 
-	public function savedetalsesion($idusuario)	{
-		$sql = "INSERT into detalle_usuario_sesion (idusuario, tcomprobante, idcomprobante, fechahora) 
-      values ('$idusuario', '','', now())";
-		return ejecutarConsulta($sql);
-	}
+	// public function savedetalsesion($idusuario)	{
+	// 	$sql = "INSERT into detalle_usuario_sesion (idusuario, tcomprobante, idcomprobante, fechahora) 
+    //   values ('$idusuario', '','', now())";
+	// 	return ejecutarConsulta($sql);
+	// }
 }

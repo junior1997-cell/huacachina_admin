@@ -425,7 +425,7 @@
 
   <div class="row authentication mx-0">
 
-    <div class="col-xxl-7 col-xl-7 col-lg-12">
+    <div class="col-xxl-7 col-xl-7 col-lg-12" style=" background-image: url('../assets/modulo/login/fondo_huacachina.png'); background-size: cover; background-position: center center;" >
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-7 col-sm-8 col-12">
           <div class="p-5">
@@ -435,7 +435,7 @@
                 <img src="../assets/images/brand-logos/logo-short.png" alt="" class="authentication-brand desktop-dark">
               </a>
             </div>
-            <p class="h5 fw-semibold mb-2">Ingresar al sistema</p>
+            <p class="h3 fw-semibold mb-2" style="color: #00ff66;">Ingresar al sistema</p>
             <p class="mb-3 text-muted op-7 fw-normal">Bienvenido denuevo!</p>
             <!-- <div class="btn-list">
               <button class="btn btn-light"><svg class="google-svg" xmlns="http://www.w3.org/2000/svg" width="2443" height="2500" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
@@ -450,16 +450,16 @@
             <div class="text-center my-5 authentication-barrier">
               <span>OR</span>
             </div> -->
-            <form name="frmAcceso" id="frmAcceso" method="post">            
+            <form name="frmAcceso" id="frmAcceso" method="post">
               <div class="row gy-3">
                 <div class="col-xl-12 mt-0">
                   <label for="logina" class="form-label text-default">Usuario</label>
-                  <input type="text" class="form-control form-control-lg" id="logina" placeholder="user name" required >
+                  <input type="text" class="form-control form-control-lg" id="logina" placeholder="user name" required>
                 </div>
                 <div class="col-xl-12 mb-3">
                   <label for="clavea" class="form-label text-default d-block">Contraseña<a href="https://wa.link/oetgkf" target="_blank" class="float-end text-danger">Olvidaste tu contraseña ?</a></label>
                   <div class="input-group">
-                    <input type="password" class="form-control form-control-lg" id="clavea" placeholder="password" required >
+                    <input type="password" class="form-control form-control-lg" id="clavea" placeholder="password" required>
                     <button class="btn btn-light" type="button" onclick="createpassword('clavea',this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
                   </div>
                   <div class="mt-2">
@@ -470,7 +470,7 @@
                       </label>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div class="col-xl-12 d-grid mt-2">
                   <button type="submit" class="btn btn-lg btn-primary login-btn ">Iniciar sesion</button>
                 </div>
@@ -480,7 +480,7 @@
               <p class="fs-12 text-muted mt-4 ">¿No tienes una cuenta? <a href="https://wa.link/oetgkf" target="_blank" class="text-primary">Inscribirse</a></p>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
 
@@ -542,14 +542,14 @@
         </div>
         <div class="toast-body bg-white"> Ingrese sus credenciales correctamente, o pida al administrador de sistema restablecer sus credenciales. </div>
       </div>
-      
+
       <div id="error-servidor" class="toast colored-toast bg-danger text-fixed-white" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-danger text-fixed-white">
           <img class="bd-placeholder-img rounded me-2" src="../assets/images/brand-logos/logo-short.png" alt="...">
           <strong class="me-auto">JDL anuncia</strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body bg-white text-black">  Error de conexion, si esto perciste contactar al ing de sistemas <b><a class="" href="https://wa.link/oetgkf" target="_blank">click aqui</a></b>. </div>
+        <div class="toast-body bg-white text-black"> Error de conexion, si esto perciste contactar al ing de sistemas <b><a class="" href="https://wa.link/oetgkf" target="_blank">click aqui</a></b>. </div>
       </div>
 
       <div id="dangerToast" class="toast colored-toast bg-danger-transparent" role="alert" aria-live="assertive" aria-atomic="true">
@@ -558,7 +558,7 @@
           <strong class="me-auto">Ynex</strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body"> Your,toast message here.  </div>
+        <div class="toast-body"> Your,toast message here. </div>
       </div>
     </div>
     <!-- /.toast-container -->
@@ -581,7 +581,7 @@
   <!-- Sweetalerts JS -->
   <script src="../assets/libs/sweetalert2/sweetalert2.min.js"></script>
   <!-- <script src="../assets/js/sweet-alerts.js"></script> -->
-  
+
   <!-- Toastr -->
   <script src="../assets/libs/toastr/toastr.min.js"></script>
   <script src="scripts/login.js"></script>

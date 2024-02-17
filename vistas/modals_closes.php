@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
-  <head>
-    <?php $title_page = "Inicio 1"; include("template/head.php"); ?>
-    <!-- Prism CSS -->
-    <link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-coy.min.css">
-  </head>
+<head>
+  <?php $title_page = "Inicio 1";
+  include("template/head.php"); ?>
+  <!-- Prism CSS -->
+  <link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-coy.min.css">
+</head>
 
 <body>
 
@@ -20,8 +21,10 @@
     <!--APP-CONTENT START-->
     <div class="main-content app-content">
       <div class="container-fluid">
-        
-        <?php $title_body = "Modal & Closes"; $subtitle_body = "Advanced Ui"; include("template/page-header.php") ?>
+
+        <?php $title_body = "Modal & Closes";
+        $subtitle_body = "Advanced Ui";
+        include("template/page-header.php") ?>
 
         <!-- Start:: row-1 -->
         <div class="row">
@@ -938,7 +941,7 @@ style="display: none;"&gt;
                         <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Modal (XL)</button>
                         <button type="button" class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Modal (LG)</button>
                         <button type="button" class="btn btn-success m-1" data-bs-toggle="modal" data-bs-target="#exampleModalMD">Modal (MD)</button>
-                        <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#exampleModalSm">Modal (SM)</button>       
+                        <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#exampleModalSm">Modal (SM)</button>
                       </div>
                     </div>
                   </div>
