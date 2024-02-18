@@ -57,7 +57,7 @@
             <li class="slide"> <a href="index.php" class="side-menu__item">Diseño landing</a> </li>
             <?php } ?>
             <?php  if ($_SESSION['empresa'] == '1') { ?>
-            <li class="slide"> <a href="index-1.php" class="side-menu__item">Empresa</a> </li>
+            <li class="slide"> <a href="empresa.php" class="side-menu__item">Empresa</a> </li>
             <?php } ?>
             <?php  if ($_SESSION['correo_landing'] == '1') { ?>
             <li class="slide"> <a href="index-2.php" class="side-menu__item">Correo</a> </li>         
