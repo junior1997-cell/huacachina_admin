@@ -82,7 +82,7 @@
           <ul class="slide-menu child1">
             <li class="slide side-menu__label1"> <a href="javascript:void(0)">Wordpress</a> </li>
             <?php  if ($_SESSION['correo_wordpress'] == '1') { ?>
-            <li class="slide"> <a href="about-us.php" class="side-menu__item">Correo Wordpress</a></li> 
+            <li class="slide"> <a href="correo_wordpress.php" class="side-menu__item">Correo Wordpress</a></li> 
             <?php } ?>                        
           </ul>
         </li>
