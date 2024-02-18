@@ -54,13 +54,13 @@
           <ul class="slide-menu child1">
             <li class="slide side-menu__label1"> <a href="javascript:void(0)">Landing Page</a>  </li>
             <?php  if ($_SESSION['landing'] == '1') { ?>
-            <li class="slide"> <a href="index.php" class="side-menu__item">Diseño landing</a> </li>
+            <li class="slide"> <a href="landing_disenio.php" class="side-menu__item">Diseño landing</a> </li>
             <?php } ?>
             <?php  if ($_SESSION['empresa'] == '1') { ?>
             <li class="slide"> <a href="empresa.php" class="side-menu__item">Empresa</a> </li>
             <?php } ?>
             <?php  if ($_SESSION['correo_landing'] == '1') { ?>
-            <li class="slide"> <a href="index-2.php" class="side-menu__item">Correo</a> </li>         
+            <li class="slide"> <a href="landing_correo.php" class="side-menu__item">Correo</a> </li>         
             <?php } ?>
           </ul>
         </li>
