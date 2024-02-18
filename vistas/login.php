@@ -425,18 +425,19 @@
 
   <div class="row authentication mx-0">
 
-    <div class="col-xxl-7 col-xl-7 col-lg-12" style=" background-image: url('../assets/modulo/login/fondo_huacachina.png'); background-size: cover; background-position: center center;" >
+    <div class="col-xxl-7 col-xl-7 col-lg-12" style=" background-image: url('../assets/modulo/login/fondo_huacachina.webp'); background-size: cover; background-position: center center;" >
       <div class="row justify-content-center align-items-center h-100">
-        <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-7 col-sm-8 col-12">
-          <div class="p-5">
-            <div class="mb-3">
-              <a href="index.html">
-                <img src="../assets/images/brand-logos/logo-short.png" alt="" class="authentication-brand desktop-logo">
-                <img src="../assets/images/brand-logos/logo-short.png" alt="" class="authentication-brand desktop-dark">
+        <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-7 col-sm-8 col-12"  >
+          <!--  #333333b5 -->
+          <div class="p-5" style="background-color:#132f11b5; border-radius: 10px;">
+            <div class="mb-3" style="text-align: center;">
+              <a href="index.php" style="display: flex; justify-content: center; align-items: center;" >
+                <img src="../assets/modulo/login/Logo.png" alt="" class="authentication-brand desktop-logo" style="height: 30%;">
+                <img src="../assets/modulo/login/Logo.png" alt="" class="authentication-brand desktop-dark" style="height: 30%;">
               </a>
             </div>
-            <p class="h3 fw-semibold mb-2" style="color: #00ff66;">Ingresar al sistema</p>
-            <p class="mb-3 text-muted op-7 fw-normal">Bienvenido denuevo!</p>
+            <p class="h3 fw-semibold mb-2" style="text-align: center; color: #f6f0b3;">Ingresar al sistema</p>
+            <p class="mb-3 op-7 fw-normal" style="text-align: center;  color: #ffff; font-size: 15px;">Bienvenido denuevo!</p>
             <!-- <div class="btn-list">
               <button class="btn btn-light"><svg class="google-svg" xmlns="http://www.w3.org/2000/svg" width="2443" height="2500" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
                   <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" />
@@ -453,11 +454,11 @@
             <form name="frmAcceso" id="frmAcceso" method="post">
               <div class="row gy-3">
                 <div class="col-xl-12 mt-0">
-                  <label for="logina" class="form-label text-default">Usuario</label>
+                  <label for="logina" class="form-label text-default" style="color: #f6f0b3;">Usuario</label>
                   <input type="text" class="form-control form-control-lg" id="logina" placeholder="user name" required>
                 </div>
                 <div class="col-xl-12 mb-3">
-                  <label for="clavea" class="form-label text-default d-block">Contraseña<a href="https://wa.link/oetgkf" target="_blank" class="float-end text-danger">Olvidaste tu contraseña ?</a></label>
+                  <label for="clavea" class="form-label text-default d-block" style="color: #f6f0b3;">Contraseña<a href="https://wa.link/oetgkf" target="_blank" class="float-end" style="color: #f6f0b3;" >Olvidaste tu contraseña ?</a></label>
                   <div class="input-group">
                     <input type="password" class="form-control form-control-lg" id="clavea" placeholder="password" required>
                     <button class="btn btn-light" type="button" onclick="createpassword('clavea',this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
@@ -465,7 +466,7 @@
                   <div class="mt-2">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                      <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
+                      <label class="form-check-label fw-normal" for="defaultCheck1" style="color: #f6f0b3;">
                         Recordar contraseña ?
                       </label>
                     </div>
@@ -477,7 +478,7 @@
               </div>
             </form>
             <div class="text-center">
-              <p class="fs-12 text-muted mt-4 ">¿No tienes una cuenta? <a href="https://wa.link/oetgkf" target="_blank" class="text-primary">Inscribirse</a></p>
+              <p class="fs-12 text-muted mt-4 " style="color: #f6f0b3;" >¿No tienes una cuenta? <a href="https://wa.link/oetgkf" target="_blank" class="text-primary">Inscribirse</a></p>
             </div>
           </div>
         </div>

@@ -36,7 +36,7 @@
                     <button class="btn-modal-effect btn btn-primary label-btn m-r-10px" onclick="limpiar_form();" data-bs-effect="effect-super-scaled" data-bs-toggle="modal"  data-bs-target="#modal-agregar-usuario"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
                     <div>
                       <p class="fw-semibold fs-18 mb-0">Lista de usuarios del sistema!</p>
-                      <span class="fs-semibold text-muted">Adminstra de manera eficiente tus usuarios.</span>
+                      <span class="fs-semibold text-muted">Administra de manera eficiente tus usuarios.</span>
                     </div>                
                   </div>
                 </div>
