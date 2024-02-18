@@ -86,47 +86,39 @@ switch ($_GET["op"]) {
   case 'listar':
     $rspta = $usuario->listar();
     //Vamos a declarar un array
-
+    echo json_encode($rspta);
     $data = array();
 
-    while ($reg = $rspta['data']->fetch_object()) {
+    foreach ($rspta['data'] as $key => $reg) {
       // Mapear el valor numérico a su respectiva descripción
       $cargo = '';
-      switch ($reg->cargo) {
-        case 0:
-          $cargo = "Administrador";
-          break;
-        case 1:
-          $cargo = "Ventas";
-          break;
-        case 2:
-          $cargo = "Logistica";
-          break;
-        case 3:
-          $cargo = "Contabilidad";
-          break;
+      switch ($reg['cargo']) {
+        case 0: $cargo = "Administrador"; break;
+        case 1: $cargo = "Ventas"; break;
+        case 2: $cargo = "Logistica"; break;
+        case 3: $cargo = "Contabilidad"; break;
       }
 
-      $img = empty($reg->imagen) ? 'no-perfil.jpg' : $reg->imagen;
+      $img = empty($reg['imagen']) ? 'no-perfil.jpg' : $reg['imagen'];
 
       $data[] = array(
         "0" => '<div class="hstack gap-2 fs-15">' .
-          '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar(' . $reg->idusuario . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>' .
-          ($reg->condicion ? '<button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="desactivar(' . $reg->idusuario . ')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>' :
-            '<button class="btn btn-icon btn-sm btn-success-light product-btn" onclick="activar(' . $reg->idusuario . ')" data-bs-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>'
+          '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>' .
+          ($reg->condicion ? '<button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="desactivar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>' :
+            '<button class="btn btn-icon btn-sm btn-success-light product-btn" onclick="activar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>'
           ) .
           '</div>',
         "1" => '<div class="d-flex flex-fill align-items-center">
           <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img src="../assets/modulo/usuario/perfil/' . $img . '" alt=""> </span></div>
           <div>
-            <span class="d-block fw-semibold text-primary">' . $reg->nombre . ' ' . $reg->apellidos . '</span>
-            <span class="text-muted">' . $reg->tipo_documento . ' ' . $reg->num_documento . '</span>
+            <span class="d-block fw-semibold text-primary">' . $reg['nombre'] . ' </span>
+            <span class="text-muted">' . $reg['tipo_documento'] . ' ' . $reg['num_documento'] . '</span>
           </div>
         </div>',
-        "2" => $reg->login,
+        "2" => $reg['login'],
         "3" => $cargo,
-        "4" => $reg->telefono,
-        "5" => $reg->email,
+        "4" => $reg['telefono'],
+        "5" => $reg['email'],
         "6" => ($reg->condicion) ? '<span class="badge bg-success-transparent">Activado</span>' : '<span class="badge bg-danger-transparent">Inhabilitado</span>'
       );
     }

@@ -124,7 +124,11 @@ class Usuario
 
 	//Implementar un método para listar los registros
 	public function listar()	{
-		$sql = "SELECT * from usuario";
+		$sql = "SELECT u.idusuario, p.nombres as nombre_usuario, p.tipo_documento, p.numero_documento as num_documento, 
+		p.celular as telefono, p.correo as email, ct.nombre as cargo, p.foto_perfil as imagen, u.login , u.estado
+		from usuario u 
+		INNER JOIN persona p on p.idpersona=u.idpersona 
+		INNER JOIN cargo_trabajador ct on p.idcargo_trabajador=ct.idcargo_trabajador";
 		return ejecutarConsulta($sql);
 	}
 	//Implementar un método para listar los registros y mostrar en el select
