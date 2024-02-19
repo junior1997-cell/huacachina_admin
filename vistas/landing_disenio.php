@@ -44,8 +44,8 @@
                 <div class="btn-list mt-md-0 mt-2">              
                   <nav>
                     <ol class="breadcrumb mb-0">
-                      <li class="breadcrumb-item"><a href="javascript:void(0);">WordPress</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Correo</li>
+                      <li class="breadcrumb-item"><a href="javascript:void(0);">Usuario</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Administracion</li>
                     </ol>
                   </nav>
                 </div>
