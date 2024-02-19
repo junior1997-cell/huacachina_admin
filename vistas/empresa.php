@@ -12,7 +12,7 @@
 
       <head>
         
-        <?php $title_page = "Correo WordPress"; include("template/head.php"); ?>    
+        <?php $title_page = "Empresa"; include("template/head.php"); ?>    
 
       </head> 
 
@@ -33,11 +33,7 @@
               <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
                 <div>
                   <div class="d-md-flex d-block align-items-center ">
-                    <button class="btn-modal-effect btn btn-primary label-btn m-r-10px disabled" data-bs-effect="effect-super-scaled" data-bs-toggle="modal"  data-bs-target="#modal-agregar-usuario"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
-                    <div>
-                      <p class="fw-semibold fs-18 mb-0">Lista de correo de WORDPRESS!</p>
-                      <span class="fs-semibold text-muted">Visualiza tus correos.</span>
-                    </div>                
+                      <p class="fw-semibold fs-18 mb-0">Datos Generales de la EMPRESA</p>
                   </div>
                 </div>
                 
@@ -45,7 +41,7 @@
                   <nav>
                     <ol class="breadcrumb mb-0">
                       <li class="breadcrumb-item"><a href="javascript:void(0);">Usuario</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Administracion</li>
+                      <li class="breadcrumb-item active" aria-current="page">Empresa</li>
                     </ol>
                   </nav>
                 </div>
@@ -53,247 +49,159 @@
               <!-- End::page-header -->
 
               <!-- Start::row-1 -->
-              <div class="row">
-                <div class="col-xxl-12 col-xl-12">
-                  <div class="">
-                    <div class="card custom-card">                  
-                      <div class="card-body table-responsive">
+              <section id="cuerpo-empresa">
+                <div class="card custom-card">
+                  <div class="card-body">
+                    <form name="form-empresa" id="form-empresa" method="POST">
+                      <div class="row" id="cargando-1-fomulario">
+                        <!-- id -->
+                        <input type="hidden" name="idnosotros" id="idnosotros" />
+                        <!-- RUC -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-2" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="tipo_documento">Tipo Doc. <sup class="text-danger">*</sup></label>
+                            <select name="tipo_documento" id="tipo_documento" class="form-control" readonly>
+                              <option value="RUC">RUC</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <!-- DOCUMENTO -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="num_documento">N° de documento <sup class="text-danger">*</sup></label>
+                            <div class="input-group">
+                              <input type="number" name="num_documento" class="form-control" id="num_documento" placeholder="N° de documento" readonly />
+                              <span class="input-group-text" style="cursor: pointer;" data-toggle="tooltip" data-original-title="Buscar Reniec/SUNAT" onclick="buscar_sunat_reniec('');">
+                                <i class="fas fa-search text-primary" id="search"></i>
+                                <i class="fa fa-spinner fa-pulse fa-fw fa-lg text-primary" id="charge" style="display: none;"></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- nombre -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-7" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="nombre">Nombre <sup class="text-danger">*</sup></label>
+                            <input type="text" name="nombre" class="form-control" id="nombre" readonly />
+                          </div>
+                        </div>
+
+                        <!-- direccion -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-8" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="direccion">Dirección <sup class="text-danger">*</sup></label>
+                            <input type="text" name="direccion" class="form-control" id="direccion" readonly />
+                          </div>
+                        </div>
+
+                        <!-- Correo -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="correo">Correo <sup class="text-danger">*</sup></label>
+                            <input type="text" name="correo" class="form-control" id="correo" readonly />
+                          </div>
+                        </div>
+
+                        <!-- celular -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="celular">Celular <sup class="text-danger">*</sup></label>
+                            <input type="text" name="celular" class="form-control" id="celular" readonly />
+                          </div>
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="telefono">Teléfono <sup class="text-danger">*</sup></label>
+                            <input type="text" name="telefono" class="form-control" id="telefono" readonly />
+                          </div>
+                        </div>
                         
-                        <table id="tabla-correo" class="table table-bordered w-100" style="width: 100%;">
-                          <thead>
-                            <tr>
-                              <th>#</th>                          
-                              <th>Fecha</th>
-                              <th>Nombre</th>                       
-                              <th>Teléfono</th>
-                              <th>Email</th>
-                              <th>Horario</th>
-                              <th>Modalidad</th>
-                              <th>Porcentaje</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <th>#</th>                          
-                              <th>Fecha</th>
-                              <th>Nombre</th>                       
-                              <th>Teléfono</th>
-                              <th>Email</th>
-                              <th>Horario</th>
-                              <th>Modalidad</th>
-                              <th>Porcentaje</th>
-                            </tr>
-                          </tfoot>
-                        </table>
+                        <!-- Latitud -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="latitud">Latitud <sup class="text-danger">*</sup></label>
+                            <input type="text" name="latitud" class="form-control" id="latitud" readonly />
+                          </div>
+                        </div>
+
+                        <!-- Longuitud -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="longuitud">Longuitud <sup class="text-danger">*</sup></label>
+                            <input type="text" name="longuitud" class="form-control" id="longuitud" readonly />
+                          </div>
+                        </div>
+
+                        <!-- Facebook -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="rs_facebook">Facebook</label>
+                            <div class="input-group">                                          
+                              <span class="input-group-text"><i class="fa-brands fa-facebook-f text-primary fa-lg"></i></span>
+                              <input type="url" name="rs_facebook" class="form-control" id="rs_facebook" placeholder="URL red social" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Instagram -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="rs_instagram">Instagram</label>
+                            <div class="input-group">                                          
+                              <span class="input-group-text"><i class="fa-brands fa-instagram text-pink fa-lg"></i></span>
+                              <input type="url" name="rs_instagram" class="form-control" id="rs_instagram" placeholder="URL red social" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- TikTok -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="rs_tiktok">TikTok</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                  <i class="fa-brands fa-tiktok fa-lg"></i>
+                                </span>
+                              <input type="url" name="rs_tiktok" class="form-control" id="rs_tiktok" placeholder="URL red social" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <!-- Horario-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="horario">Horario <sup class="text-danger">*</sup> </label> 
+                            <textarea name="horario" id="horario" class="form-control" rows="3" readonly></textarea>
+                          </div>
+                        </div>
+
                       </div>
-                    
-                    </div>
+
+                      <div class="row" id="cargando-2-fomulario" style="display: none;" >
+                        <div class="col-lg-12 text-center">
+                          <i class="fas fa-spinner fa-pulse fa-6x"></i><br><br>
+                          <h4>Cargando...</h4>
+                        </div>
+                      </div>
+                      <button type="submit" style="display: none;" id="submit-form-actualizar-registro">Submit</button>
+                    </form>
                   </div>
-                </div>            
-              </div>
+                  <div class="card-footer d-flex justify-content-end">
+                    <button class="btn btn-warning editar"  onclick="activar_editar(1);">Editar</button>
+                    <button type="submit" class="btn btn-success actualizar" id="actualizar_registro" style="display: none;">Actualizar</button>
+                  </div>
+                </div>
+              </section>
               <!-- End::row-1 -->
 
             </div>
           </div>
-          <!-- End::app-content -->
-
-          <div class="modal fade modal-effect" id="modal-agregar-usuario" tabindex="-1" aria-labelledby="modal-agregar-usuarioLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h6 class="modal-title" id="modal-agregar-usuarioLabel1">Modal title</h6>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form name="form-agregar-usuario" id="form-agregar-usuario" method="POST" class="row g-3 needs-validation" novalidate>
-                    <ul class="nav nav-tabs tab-style-2 mb-3"  role="tablist">
-                      <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="dato-usuario" data-bs-toggle="tab" data-bs-target="#dato-usuario-pane" type="button" role="tab" aria-selected="true"><i class="ri-gift-line me-1 align-middle"></i>Datos del usuario</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="rol-acceso" data-bs-toggle="tab" data-bs-target="#rol-acceso-pane" type="button" role="tab" aria-selected="false"><i class="ri-check-double-line me-1 align-middle"></i>Roles de acceso</button>
-                      </li>                  
-                    </ul>
-                    <div class="tab-content" >
-                      <div class="tab-pane fade show active text-muted" id="dato-usuario-pane" role="tabpanel" tabindex="0">
-                        <div class="row gy-2" id="cargando-1-fomulario">
-                          <!-- id usuario -->
-                          <input type="hidden" name="idusuario" id="idusuario" />
-
-                          <!-- Imgen -->
-                          <div class="col-md-4">
-                            <div class="mb-4 d-sm-flex align-items-center">
-                              <div class="mb-0 me-5">
-                                <span class="avatar avatar-xxl avatar-rounded">
-                                  <img src="../assets/images/faces/9.jpg" alt="" id="imagenmuestra" onerror="this.src='../assets/modulo/usuario/perfil/no-perfil.jpg';">
-                                  <a href="javascript:void(0);" class="badge rounded-pill bg-primary avatar-badge">
-                                    <input type="file" class="position-absolute w-100 h-100 op-0" name="imagen" id="imagen">
-                                    <input type="hidden" name="imagenactual" id="imagenactual">
-                                    <i class="fe fe-camera"></i>
-                                  </a>
-                                </span>
-                              </div>
-                              <div class="btn-group">
-                                <a class="btn btn-primary" onclick="cambiarImagen()"><i class='bx bx-cloud-upload bx-tada fs-5'></i> Subir</a>
-                                <a class="btn btn-light" onclick="removerImagen()"><i class="bi bi-trash fs-6"></i> Remover</a>
-                              </div>
-                            </div>
-                          </div>                      
-
-                          <!-- Tipo doc -->
-                          <div class="col-md-3">
-                            <div class="form-group">
-                              <label for="tipo_documento" class="form-label">Tipo documento(*):</label>
-                              <select class="form-control"  name="tipo_documento" id="tipo_documento">
-                                <option value="DNI">DNI</option>
-                                <option value="RUC">RUC</option>
-                                <option value="CEDULA">CEDULA</option>
-                              </select>
-                            </div>                        
-                          </div>
-                          <!--  Nro Doc -->
-                          <div class="col-md-3">
-                            <div class="form-group">
-                              <label for="num_documento" class="form-label">Número(*):</label>
-                              
-                              <div class="input-group mb-3">                            
-                                <input type="text" class="form-control" name="num_documento" id="num_documento" required>
-                                <button class="btn btn-primary" type="button" onclick="consultaDniSunat();" id="icon-search-sr"><i class='bx bx-search-alt fs-5'></i></button>
-                              </div>
-                            </div>                                         
-                          </div>
-                          <!-- Nombre -->
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="nombre" class="form-label">Nombres(*):</label>
-                              <input type="text" class="form-control" name="nombre" id="nombre" required>
-                            </div>                                         
-                          </div>
-                          <!-- Apellidos -->
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="apellidos" class="form-label">Apellidos(*):</label>
-                              <input type="text" class="form-control" name="apellidos" id="apellidos" required>       
-                            </div>                                  
-                          </div>
-                        
-                          <!-- Direccion -->
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="direccion" class="form-label">Dirección :</label>
-                              <input type="text" class="form-control" name="direccion" id="direccion" required>
-                            </div>                                            
-                          </div>
-                          <!-- Correo -->
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="email" class="form-label">Correo :</label>
-                              <input type="email" class="form-control" name="email" id="email" required>  
-                            </div>                                       
-                          </div>
-                          <!-- Celular -->
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="telefono" class="form-label">Celular:</label>
-                              <input type="text" class="form-control" name="telefono" id="telefono"  required> 
-                            </div>                        
-                          </div>
-                        
-                          <!-- Cargo -->
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="cargo" class="form-label">Cargo:</label>
-                              <select class="form-control" name="cargo" id="cargo">                                
-                                <option value="0">Administrador</option>
-                                <option value="1">Ventas</option>
-                                <option value="2">Logistica</option>
-                                <option value="3">Contabilidad</option>
-                              </select>
-                            </div>                                            
-                          </div>
-                          <!-- Usuario -->
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="login" class="form-label">Usuario:</label>
-                              <input type="text" class="form-control" name="login" id="login" required>
-                            </div>                                         
-                          </div>
-                          <!--  Contraseña -->
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="clave" class="form-label">Contraseña:</label>
-                              <div class="input-group mb-3">                            
-                                <input type="password" class="form-control" name="clave" id="clave" required placeholder="Contraseña" aria-describedby="icon-view-password">
-                                <button class="btn btn-primary" type="button" onclick="ver_password(this);" id="icon-view-password"><i class="fa-solid fa-eye"></i></button>
-                              </div>
-                            </div>                        
-                          </div>
-
-                        </div>
-                        <div class="row" id="cargando-2-fomulario" style="display: none;" >
-                          <div class="col-lg-12 text-center">                         
-                            <div class="spinner-border me-4" style="width: 3rem; height: 3rem;"role="status"></div>
-                            <h4 class="bx-flashing">Cargando...</h4>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="tab-pane fade " id="rol-acceso-pane" role="tabpanel" tabindex="0">
-                        <ul class="ps-3 mb-0">
-                        <div class="row gy-2" id="cargando-3-fomulario">  
-
-                          <div class="col-xl-12">                        
-                            <div class="mail-notification-settings">
-                              <p class="fs-14 mb-1 fw-semibold text-primary">Roles de Módulo</p>
-                              <p class="fs-12 mb-0 text-muted">Escoje los módulos correspondientes al menú</p>
-                            </div>                        
-                            <div  id="permisos"> </div>
-                          </div>    
-
-                          <div class="col-xl-12">                          
-                            <div class="mail-notification-settings">
-                              <p class="fs-14 mb-1 fw-semibold text-primary">Rol Correlativos</p>
-                              <p class="fs-12 mb-0 text-muted">Selecciona el correlativo de los comprobantes.</p>
-                            </div>                        
-                            <div id="series"> </div>                        
-                          </div>
-
-                          <div class="col-xl-12">                        
-                            <div class="mail-notification-settings">
-                              <p class="fs-14 mb-1 fw-semibold text-primary">Rol para empresa</p>
-                              <p class="fs-12 mb-0 text-muted">Asigna al usuario a la empresa correcta</p>
-                            </div>                        
-                            <div id="empresas"> </div>                                           
-                          </div>
-
-                        </div>
-                        <div class="row" id="cargando-4-fomulario" style="display: none;" >
-                          <div class="col-lg-12 text-center">                         
-                            <div class="spinner-border me-4" style="width: 3rem; height: 3rem;"role="status"></div>
-                            <h4 class="bx-flashing">Cargando...</h4>
-                          </div>
-                        </div>
-                        </ul>
-                      </div>                  
-                    </div>   
-                  <!-- Chargue -->
-                    <div class="p-l-25px col-lg-12" id="barra_progress_usuario_div" style="display: none;" >
-                      <div  class="progress progress-lg custom-progress-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"> 
-                        <div id="barra_progress_usuario" class="progress-bar" style="width: 0%"> <div class="progress-bar-value">0%</div> </div> 
-                      </div>
-                    </div>
-                    <!-- Submit -->
-                    <button type="submit" style="display: none;" id="submit-form-usuario">Submit</button>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="limpiar_form();"><i class="las la-times fs-lg"></i> Close</button>
-                  <button type="button" class="btn btn-primary" id="guardar_registro_usuario" ><i class="bx bx-save bx-tada fs-lg"></i> Guardar</button>
-                </div>
-              </div>
-            </div>
-          </div>          
+                  
 
           <?php include("template/search_modal.php"); ?>
           <?php include("template/footer.php"); ?>
@@ -303,7 +211,7 @@
         <?php include("template/scripts.php"); ?>
         <?php include("template/custom_switcherjs.php"); ?>    
 
-        <script src="scripts/correo_wordpress.js"></script>
+        <script src="scripts/empresa.js"></script>
 
         <script> $(function () { $('[data-toggle="tooltip"]').tooltip(); }); </script>
       

@@ -1,227 +1,217 @@
-var tabla_correo;
-var modoDemo = false;
-//Función que se ejecuta al inicio
+
 function init() {
 
-	listar_tabla_principal();
-
+  mostrar();
 	// ══════════════════════════════════════ G U A R D A R   F O R M ══════════════════════════════════════
-  $("#guardar_registro_usuario").on("click", function (e) { if ( $(this).hasClass('send-data')==false) { $("#submit-form-usuario").submit(); }  });
+  $("#actualizar_registro").on("click", function (e) { $("#submit-form-actualizar-registro").submit(); });
 
   // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T 2 ══════════════════════════════════════
  
 }
 
-//Función limpiar
-function limpiar_form() {
-	$("#nombre").val("");
-	$("#apellidos").val("");
-	$("#num_documento").val("");
-	$("#direccion").val("");
-	$("#telefono").val("");
-	$("#email").val("");
-	$("#cargo").val("");
-	$("#login").val("");
-	$("#clave").val("");	
-	$("#idusuario").val("");
+function activar_editar(estado) {
 
-  $("#imagenactual").val("");
-  $("#imagenmuestra").attr("src", "../assets/modulo/usuario/perfil/no-perfil.jpg");
-  $("#imagenmuestra").attr("src", "../assets/modulo/usuario/perfil/no-perfil.jpg").show();
-  var imagenMuestra = document.getElementById('imagenmuestra');
-  if (!imagenMuestra.src || imagenMuestra.src == "") {
-    imagenMuestra.src = '../assets/modulo/usuario/perfil/no-perfil.jpg';
+  if (estado=="1") {
+    $(".editar").hide();
+    $(".actualizar").show();
+
+    $("#nombre").removeAttr("readonly");
+    $("#direccion").removeAttr("readonly");
+    $("#tipo_documento").removeAttr("readonly");
+    $("#num_documento").removeAttr("readonly");
+    $("#celular").removeAttr("readonly");
+    $("#telefono").removeAttr("readonly");
+    $("#correo").removeAttr("readonly");
+    $("#latitud").removeAttr("readonly");
+    $("#longuitud").removeAttr("readonly");
+    $("#horario").removeAttr("readonly");
+
+    $("#rs_facebook").removeAttr("readonly");
+    $("#rs_instagram").removeAttr("readonly");
+    $("#rs_tiktok").removeAttr("readonly");
+    toastr.success('Campos habiliados para editar!!!')
+  }else if (estado=="2") {
+
+    $(".editar").show();
+    $(".actualizar").hide();
+
+    $("#nombre").attr('readonly','true');
+    $("#direccion").attr('readonly','true');
+    $("#tipo_documento").attr('readonly','true');
+    $("#num_documento").attr('readonly','true');
+    $("#celular").attr('readonly','true');
+    $("#telefono").attr('readonly','true');
+    $("#correo").attr('readonly','true');
+    $("#latitud").attr('readonly','true');
+    $("#longuitud").attr('readonly','true');
+    $("#horario").attr('readonly','true');
+
+    $("#rs_facebook").attr('readonly','true');
+    $("#rs_instagram").attr('readonly','true');
+    $("#rs_tiktok").attr('readonly','true');
   }
-
-  $.post("../ajax/usuario.php?op=permisos&id=", function (r) { $("#permisos").html(r); });
-  $.post("../ajax/usuario.php?op=series&id=", function (r) { $("#series").html(r); });
-
-  // Limpiamos las validaciones
-  $(".form-control").removeClass('is-valid');
-  $(".form-control").removeClass('is-invalid');
-  $(".error.invalid-feedback").remove();
 }
 
-//Función Listar
-function listar_tabla_principal() {
-	tabla_correo = $('#tabla-correo').dataTable({
-    lengthMenu: [[ -1, 5, 10, 25, 75, 100, 200,], ["Todos", 5, 10, 25, 75, 100, 200, ]],//mostramos el menú de registros a revisar
-    "aProcessing": true,//Activamos el procesamiento del datatables
-    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-    dom:"<'row'<'col-md-3'B><'col-md-3 float-left'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",//Definimos los elementos del control de tabla
-    buttons: [
-      { text: '<i class="fa-solid fa-arrows-rotate"></i> ', className: "buttons-reload btn btn-outline-info btn-wave ", action: function ( e, dt, node, config ) { if (tabla_correo) { tabla_correo.ajax.reload(null, false); } } },
-      { extend: 'copy', exportOptions: { columns: [0,1,2,3,4,5,6,7], }, text: `<i class="fas fa-copy" ></i>`, className: "btn btn-outline-dark btn-wave ", footer: true,  }, 
-      { extend: 'excel', exportOptions: { columns: [0,1,2,3,4,5,6,7], }, title: 'Lista de correo', text: `<i class="far fa-file-excel fa-lg" ></i>`, className: "btn btn-outline-success btn-wave ", footer: true,  }, 
-      { extend: 'pdf', exportOptions: { columns: [0,1,2,3,4,5,6,7], }, title: 'Lista de correo', text: `<i class="far fa-file-pdf fa-lg"></i>`, className: "btn btn-outline-danger btn-wave ", footer: false, orientation: 'landscape', pageSize: 'LEGAL',  },
-      { extend: "colvis", text: `<i class="fas fa-outdent"></i>`, className: "btn btn-outline-primary", exportOptions: { columns: "th:not(:last-child)", }, },
-    ],
-		"ajax":	{
-			url: '../ajax/correo_wordpress.php?op=tbla_principal',
-			type: "get",
-			dataType: "json",
-			error: function (e) {
-				console.log(e.responseText);
-			},
-      complete: function () {
-        $(".buttons-reload").attr('data-bs-toggle', 'tooltip').attr('data-bs-original-title', 'Recargar');
-        $(".buttons-copy").attr('data-bs-toggle', 'tooltip').attr('data-bs-original-title', 'Copiar');
-        $(".buttons-excel").attr('data-bs-toggle', 'tooltip').attr('data-bs-original-title', 'Excel');
-        $(".buttons-pdf").attr('data-bs-toggle', 'tooltip').attr('data-bs-original-title', 'PDF');
-        $(".buttons-colvis").attr('data-bs-toggle', 'tooltip').attr('data-bs-original-title', 'Columnas');
-        $('[data-bs-toggle="tooltip"]').tooltip();
-      },
-		},
-		language: {
-      lengthMenu: "Mostrar: _MENU_ registros",
-      buttons: { copyTitle: "Tabla Copiada", copySuccess: { _: "%d líneas copiadas", 1: "1 línea copiada", }, },
-      sLoadingRecords: '<i class="fas fa-spinner fa-pulse fa-lg"></i> Cargando datos...'
+function mostrar() {
+
+  $("#cargando-1-fomulario").hide();
+  $("#cargando-2-fomulario").show();
+
+  $.post("../ajax/empresa.php?op=mostrar_empresa", {}, function (e, status) {
+
+    e = JSON.parse(e);  console.log(e);  
+    if (e.status){
+
+      $("#cargando-1-fomulario").show();
+      $("#cargando-2-fomulario").hide();
+
+      $("#idnosotros").val(e.data.idnosotros);
+      $("#nombre").val(e.data.nombre_empresa);
+      $("#direccion").val(e.data.direccion);
+      $("#num_documento").val(e.data.num_documento);
+      $("#celular").val(e.data.celular);
+      $("#telefono").val(e.data.telefono_fijo);
+      $("#correo").val(e.data.correo);
+      $("#latitud").val(e.data.latitud);
+      $("#longuitud").val(e.data.longitud);
+      $("#horario").val(e.data.horario);
+      $("#rs_facebook").val(e.data.rs_facebook);
+      $("#rs_instagram").val(e.data.rs_instagram);
+      $("#rs_tiktok").val(e.data.rs_tiktok);
+      
+    }else{
+      ver_errores(e);
+    }
+
+  }).fail( function(e) { console.log(e); ver_errores(e); } );
+}
+
+function actualizar_datos_generales(e) {
+  
+  var formData = new FormData($("#form-empresa")[0]);
+
+  $.ajax({
+    url: "../ajax/empresa.php?op=actualizar_datos_empresa",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (e) {
+      try {
+        e = JSON.parse(e);  console.log(e); 
+        if (e.status == true) {
+
+          Swal.fire("Correcto!", "El registro se guardo correctamente.", "success");
+
+          // Reiniciar las validaciones y estilos
+          $("#form-empresa").validate().resetForm();
+          // Limpiar clases de validación en los campos
+          $("#form-empresa").find(".is-valid").removeClass("is-valid");
+          $("#form-empresa").find(".is-invalid").removeClass("is-invalid");
+
+          mostrar(); activar_editar(2);
+
+        }else{  
+          ver_errores(e);
+        } 
+      } catch (err) {
+        console.log('Error: ', err.message); toastr.error('<h5 class="font-size-16px">Error temporal!!</h5> puede intentalo mas tarde, o comuniquese con <i><a href="tel:+51921305769" >921-305-769</a></i> ─ <i><a href="tel:+51921487276" >921-487-276</a></i>');
+      } 
+
     },
-    "bDestroy": true,
-    "iDisplayLength": 10,//Paginación
-    "order": [[0, "asc"]]//Ordenar (columna,orden)
-	}).DataTable();
-}
-//Función para guardar o editar
+    xhr: function () {
+      var xhr = new window.XMLHttpRequest();
 
-function guardar_y_editar_usuario(e) {
-	//e.preventDefault(); //No se activará la acción predeterminada del evento
+      xhr.upload.addEventListener(
+        "progress",
+        function (evt) {
+          if (evt.lengthComputable) {
+            var percentComplete = (evt.loaded / evt.total) * 100;
+            /*console.log(percentComplete + '%');*/
+            $("#barra_progress2").css({ width: percentComplete + "%" });
 
-	var formData = new FormData($("#form-agregar-usuario")[0]);
+            $("#barra_progress2").text(percentComplete.toFixed(2) + " %");
 
-	$.ajax({
-		url: "../ajax/usuario.php?op=guardaryeditar",
-		type: "POST",
-		data: formData,
-		contentType: false,
-		processData: false,
-		success: function (e) {
-			try {
-				e = JSON.parse(e);  //console.log(e); 
-        if (e.status == true) {	
-					tabla_correo.ajax.reload();
-					$('#modal-agregar-usuario').modal('hide');
-					sw_success('Exito', 'Usuario guardado correctamente.');
-				} else {
-					ver_errores(jqXhr);
-				}				
-			} catch (err) { console.log('Error: ', err.message); toastr_error("Error temporal!!",'Puede intentalo mas tarde, o comuniquese con:<br> <i><a href="tel:+51921305769" >921-305-769</a></i> ─ <i><a href="tel:+51921487276" >921-487-276</a></i>', 700); }      
-		},
-		error: function (jqXhr, ajaxOptions, thrownError) {
-			ver_errores(jqXhr);
-		}
-	});
-
+            if (percentComplete === 100) {
+              l_m();
+            }
+          }
+        },
+        false
+      );
+      return xhr;
+    },
+  });
 }
 
-function mostrar(idusuario) {
-	$('#modal-agregar-usuario').modal('show');
-	$('#cargando-1-fomulario').hide();	$('#cargando-2-fomulario').show();
-	$('#cargando-3-fomulario').hide();	$('#cargando-4-fomulario').show();
-	$.post("../ajax/usuario.php?op=mostrar", { idusuario: idusuario }, function (e, status) {
-		e = JSON.parse(e);
+function l_m() {
+  // limpiar();
+  $("#barra_progress").css({ width: "0%" });
 
-		$("#nombre").val(e.data.nombre);
-		$("#apellidos").val(e.data.apellidos);
-		$("#tipo_documento").append('<option value="' + e.data.tipo_documento + '">' + e.data.tipo_documento + '</option>');
-		$("#tipo_documento").val(e.data.tipo_documento);
-		//$("#tipo_documento").selectpicker('refresh');
-		$("#num_documento").val(e.data.num_documento);
-		$("#direccion").val(e.data.direccion);
-		$("#telefono").val(e.data.telefono);
-		$("#email").val(e.data.email);
-		$("#cargo").val(e.data.cargo);
-		$("#login").val(e.data.login);
-		//$("#clave").val(e.data.clave);
+  $("#barra_progress").text("0%");
 
-		$("#imagenmuestra").show();
-		$("#imagenmuestra").attr("src", "../asset/modulo/usuario/perfil/" + e.data.imagen);
-		$("#imagenactual").val(e.data.imagen);
-		$("#idusuario").val(e.data.idusuario);
+  $("#barra_progress2").css({ width: "0%" });
 
-		$.post("../ajax/usuario.php?op=permisos&id=" + idusuario, function (r) {
-			$("#permisos").html(r);
-			$.post("../ajax/usuario.php?op=series&id=" + idusuario, function (r) {
-				$("#series").html(r);
-				$.post("../ajax/usuario.php?op=permisosEmpresa&id=" + idusuario, function (r) {
-					$("#empresas").html(r);
-					
-					$('#cargando-1-fomulario').show();	$('#cargando-2-fomulario').hide();
-					$('#cargando-3-fomulario').show();	$('#cargando-4-fomulario').hide();
-				});
-			});
-		});
-
-	});	
+  $("#barra_progress2").text("0%");
 }
 
-$(document).ready(function () {
-  init();
-});
+init();
 
 // .....::::::::::::::::::::::::::::::::::::: V A L I D A T E   F O R M  :::::::::::::::::::::::::::::::::::::::..
 
 $(function () {
-  $('#cargo').on('change', function() { $(this).trigger('blur'); });
-  $("#form-agregar-usuario").validate({
-    ignore: "",
-    rules: { 
-      tipo_documento: { required: true, },
-      num_documento:  { required: true, },
-      nombre:  				{ required: true, },
-      apellidos:      { required: true, },
-      direccion:      { required: true, minlength:2, maxlength:100 },
-      email:    			{  minlength:2, maxlength:200 },
-      telefono:       { required: true, minlength:5, maxlength:12 },
-      cargo:          { required: true,   },       
-      clave:    			{ required: true,   },       
-      imagen:         { extension: "png|jpg|jpeg|webp|svg",  }, 
-			login:          { required: true, minlength: 4, maxlength: 20,
-        remote: {
-          url: "../ajax/usuario.php?op=validar_usuario",
-          type: "get",
-          data: {
-            action: function () { return "checkusername";  },
-            username: function() { var username = $("#login").val(); return username; },
-            idusuario: function() { var idusuario = $("#idusuario").val(); return idusuario; }
-          }
-        }
-      },
+  
+  $.validator.setDefaults({ submitHandler: function (e) { actualizar_datos_generales(e) },  });
+
+  $("#form-empresa").validate({
+    rules: {
+      nombre:       { required: true, minlength: 4, maxlength: 100, } , 
+      direccion:    { required: true, minlength: 4, maxlength: 100, } , 
+      num_documento:{ required: true, minlength: 8, maxlength: 15, } , 
+      celular:      { required: true, minlength: 4, maxlength: 9,} , 
+      telefono:     { required: true, minlength: 4, maxlength: 9,} , 
+      latitud:      { required: true, minlength: 4, maxlength: 10,} , 
+      longuitud:    { required: true, minlength: 4, maxlength: 10,} , 
+      correo:       { required: true, minlength: 4, maxlength: 100, } , 
+      horario:      { required: true },
+      rs_facebook:  { required: true, minlength: 4, maxlength: 150,}, 
+      rs_instagram: { required: true, minlength: 4, maxlength: 150,}, 
+      rs_tiktok:    { required: true, minlength: 4, maxlength: 150,}, 
     },
     messages: {
-      tipo_documento:	{ required: "Campo requerido", },
-      num_documento:  { required: "Campo requerido", },
-      nombre:  				{ required: "Campo requerido", },
-      apellidos:      { required: "Campo requerido", },
-      direccion:      { required: "Campo requerido", minlength:"Minimo {0} caracteres", maxlength:"Maximo {0} caracteres" },
-      email:    			{ minlength:"Minimo {0} caracteres", maxlength:"Maximo {0} caracteres" },
-      telefono:       { required: "Campo requerido", minlength:"Minimo {0} caracteres", maxlength:"Maximo {0} caracteres" },
-      cargo:          { required: "Campo requerido",  },
-      login:    			{ required: "Campo requerido", remote:"Usuario en uso."},
-      clave:    			{ required: "Campo requerido", },      
-      imagen:         { extension: "Ingrese imagenes validas ( {0} )", },
+
+      direccion: { required: "Por favor rellenar el campo", }, 
+      celular: { required: "Por favor rellenar el campo", }, 
+      telefono: { required: "Por favor rellenar el campo", }, 
+      latitud: { required: "Por favor rellenar el campo", }, 
+      longuitud: { required: "Por favor rellenar el campo", }, 
+      correo: { required: "Por favor rellenar el campo", }, 
+      horario: { required: "Por favor rellenar el campo", }
     },
-        
+    
     errorElement: "span",
 
     errorPlacement: function (error, element) {
+
       error.addClass("invalid-feedback");
+
       element.closest(".form-group").append(error);
     },
 
     highlight: function (element, errorClass, validClass) {
+
       $(element).addClass("is-invalid").removeClass("is-valid");
     },
 
     unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass("is-invalid").addClass("is-valid");   
+
+      $(element).removeClass("is-invalid").addClass("is-valid");
+   
     },
-    submitHandler: function (e) {
-      $(".modal-body").animate({ scrollTop: $(document).height() }, 600); // Scrollea hasta abajo de la página
-      guardar_y_editar_usuario(e);      
-    },
+
   });
-  $('#cargo').rules('add', { required: true, messages: {  required: "Campo requerido" } });
+
 });
 
 // .....::::::::::::::::::::::::::::::::::::: F U N C I O N E S    A L T E R N A S  :::::::::::::::::::::::::::::::::::::::..
