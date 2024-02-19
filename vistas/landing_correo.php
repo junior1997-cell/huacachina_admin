@@ -35,17 +35,17 @@
                   <div class="d-md-flex d-block align-items-center ">
                     <button class="btn-modal-effect btn btn-primary label-btn m-r-10px disabled" data-bs-effect="effect-super-scaled" data-bs-toggle="modal"  data-bs-target="#modal-agregar-usuario"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
                     <div>
-                      <p class="fw-semibold fs-18 mb-0">Lista de correo de WORDPRESS!</p>
+                      <p class="fw-semibold fs-18 mb-0">Lista de correo!</p>
                       <span class="fs-semibold text-muted">Visualiza tus correos.</span>
                     </div>                
                   </div>
-                </div>
+                </div> 
                 
                 <div class="btn-list mt-md-0 mt-2">              
                   <nav>
                     <ol class="breadcrumb mb-0">
-                      <li class="breadcrumb-item"><a href="javascript:void(0);">Usuario</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Administracion</li>
+                      <li class="breadcrumb-item"><a href="javascript:void(0);">Landing</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Correo</li>
                     </ol>
                   </nav>
                 </div>
@@ -54,36 +54,33 @@
 
               <!-- Start::row-1 -->
               <div class="row">
-                <div class="col-xxl-12 col-xl-12">
+                <div class="col-xxl-7 col-xl-7 col-lg-6 col-md-12 col-sm-12">
                   <div class="">
-                    <div class="card custom-card">                  
+                    <div class="card custom-card">    
+
                       <div class="card-body table-responsive">
                         
                         <table id="tabla-correo" class="table table-bordered w-100" style="width: 100%;">
                           <thead>
                             <tr>
                               <th>#</th>                          
+                              <th><i class='bx bx-cog bx-spin' ></i></th>
                               <th>Fecha</th>
-                              <th>Nombre</th>                       
-                              <th>Teléfono</th>
-                              <th>Email</th>
-                              <th>Horario</th>
-                              <th>Modalidad</th>
-                              <th>Porcentaje</th>
+                              <th>Dia</th>
+                              <th>Nombre y apellidos</th>                       
+                              <th>Teléfono</th>                              
                             </tr>
                           </thead>
                           <tbody>
                           </tbody>
                           <tfoot>
                             <tr>
-                              <th>#</th>                          
+                              <th>#</th>   
+                              <th><i class='bx bx-cog bx-spin' ></i></th>                       
                               <th>Fecha</th>
-                              <th>Nombre</th>                       
-                              <th>Teléfono</th>
-                              <th>Email</th>
-                              <th>Horario</th>
-                              <th>Modalidad</th>
-                              <th>Porcentaje</th>
+                              <th>Dia</th>
+                              <th>Nombre y apellidos</th>                       
+                              <th>Teléfono</th>                              
                             </tr>
                           </tfoot>
                         </table>
@@ -91,7 +88,56 @@
                     
                     </div>
                   </div>
-                </div>            
+                </div>   
+                
+                <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+                  <div class="card custom-card">
+                    <div class="card-header justify-content-between flex-wrap">
+                      <div class="card-title"> Estatistica correo </div>
+                      <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary btn-sm btn-wave">1D</button>
+                        <button type="button" class="btn btn-primary-light btn-sm btn-wave">1W</button>
+                        <button type="button" class="btn btn-primary-light btn-sm btn-wave">1M</button>
+                        <button type="button" class="btn btn-primary-light btn-sm btn-wave">3M</button>
+                        <button type="button" class="btn btn-primary-light btn-sm btn-wave">6M</button>
+                        <button type="button" class="btn btn-primary-light btn-sm btn-wave">1Y</button>
+                      </div> -->
+                    </div>
+                    <div class="card-body p-0">
+                      <div class="d-flex flex-wrap p-3 border-bottom border-block-end-dashed">
+                        <div class="me-3">
+                          <span class="avatar avatar-md avatar-rounded p-2 bg-blue">
+                            <img src="../assets/modulo/login/icon.png" alt="">
+                          </span>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-evenly flex-fill">
+                          <div class="m-sm-0 m-2">
+                            <span>Domingo</span> <div class="fw-semibold mb-0 text-danger dia-semana-7"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                          <div class="m-sm-0 m-2">
+                            <span>Lunes</span> <div class="fw-semibold mb-0 text-danger dia-semana-1"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                          <div class="m-sm-0 m-2">
+                            <span>Martes</span><div class="fe-semibold mb-0 text-danger dia-semana-2 "><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                          <div class="m-sm-0 m-2">
+                            <span>Miércoles</span> <div class="fw-semibold mb-0 text-danger dia-semana-3"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                          <div class="m-sm-0 m-2">
+                            <span>Jueves</span> <div class="fw-semibold mb-0 text-danger dia-semana-4"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                          <div class="m-sm-0 m-2">
+                            <span>Viernes</span> <div class="fw-semibold mb-0 text-danger dia-semana-5"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                          <div class="m-sm-0 m-2">
+                            <span>Sábado</span> <div class="fw-semibold mb-0 text-danger dia-semana-6"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="nft-statistics" class="p-3 text-center"> <div class="spinner-border w-50px h-50px" role="status" > </div> </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- End::row-1 -->
 
@@ -301,12 +347,17 @@
         </div>
 
         <?php include("template/scripts.php"); ?>
-        <?php include("template/custom_switcherjs.php"); ?>    
+        
+          
+        <!-- Apex Charts JS -->
+        <script src="../assets/libs/apexcharts/apexcharts.min.js"></script> 
 
-        <script src="scripts/correo_wordpress.js"></script>
+        <script src="scripts/landing_correo.js"></script>       
 
-        <script> $(function () { $('[data-toggle="tooltip"]').tooltip(); }); </script>
-      
+        <?php include("template/custom_switcherjs.php"); ?> 
+
+        <script> $(function () { $('[data-bs-toggle="tooltip"]').tooltip(); }); </script>
+        
       </body>
 
     </html>

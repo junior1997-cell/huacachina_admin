@@ -4,6 +4,7 @@ var modoDemo = false;
 function init() {
 
 	listar_tabla_principal();
+  reporte_correo();
 
 	// ══════════════════════════════════════ G U A R D A R   F O R M ══════════════════════════════════════
   $("#guardar_registro_usuario").on("click", function (e) { if ( $(this).hasClass('send-data')==false) { $("#submit-form-usuario").submit(); }  });
@@ -50,14 +51,14 @@ function listar_tabla_principal() {
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
     dom:"<'row'<'col-md-3'B><'col-md-3 float-left'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",//Definimos los elementos del control de tabla
     buttons: [
-      { text: '<i class="fa-solid fa-arrows-rotate"></i> ', className: "buttons-reload btn btn-outline-info btn-wave ", action: function ( e, dt, node, config ) { if (tabla_correo) { tabla_correo.ajax.reload(null, false); } } },
-      { extend: 'copy', exportOptions: { columns: [0,1,2,3,4,5,6,7], }, text: `<i class="fas fa-copy" ></i>`, className: "btn btn-outline-dark btn-wave ", footer: true,  }, 
-      { extend: 'excel', exportOptions: { columns: [0,1,2,3,4,5,6,7], }, title: 'Lista de correo', text: `<i class="far fa-file-excel fa-lg" ></i>`, className: "btn btn-outline-success btn-wave ", footer: true,  }, 
-      { extend: 'pdf', exportOptions: { columns: [0,1,2,3,4,5,6,7], }, title: 'Lista de correo', text: `<i class="far fa-file-pdf fa-lg"></i>`, className: "btn btn-outline-danger btn-wave ", footer: false, orientation: 'landscape', pageSize: 'LEGAL',  },
+      { text: '<i class="fa-solid fa-arrows-rotate"></i> ', className: "buttons-reload btn btn-outline-info btn-wave ", action: function ( e, dt, node, config ) { if (tabla_correo) { tabla_correo.ajax.reload(null, false); reporte_correo(); } } },
+      { extend: 'copy', exportOptions: { columns: [0,2,3,4,5], }, text: `<i class="fas fa-copy" ></i>`, className: "btn btn-outline-dark btn-wave ", footer: true,  }, 
+      { extend: 'excel', exportOptions: { columns: [0,2,3,4,5], }, title: 'Lista de correo', text: `<i class="far fa-file-excel fa-lg" ></i>`, className: "btn btn-outline-success btn-wave ", footer: true,  }, 
+      { extend: 'pdf', exportOptions: { columns: [0,2,3,4,5], }, title: 'Lista de correo', text: `<i class="far fa-file-pdf fa-lg"></i>`, className: "btn btn-outline-danger btn-wave ", footer: false, orientation: 'landscape', pageSize: 'LEGAL',  },
       { extend: "colvis", text: `<i class="fas fa-outdent"></i>`, className: "btn btn-outline-primary", exportOptions: { columns: "th:not(:last-child)", }, },
     ],
 		"ajax":	{
-			url: '../ajax/correo_wordpress.php?op=tbla_principal',
+			url: '../ajax/landing_correo.php?op=tbla_principal',
 			type: "get",
 			dataType: "json",
 			error: function (e) {
@@ -73,7 +74,7 @@ function listar_tabla_principal() {
       },
 		},
 		language: {
-      lengthMenu: "Mostrar: _MENU_ registros",
+      lengthMenu: "Mostrar: _MENU_",
       buttons: { copyTitle: "Tabla Copiada", copySuccess: { _: "%d líneas copiadas", 1: "1 línea copiada", }, },
       sLoadingRecords: '<i class="fas fa-spinner fa-pulse fa-lg"></i> Cargando datos...'
     },
@@ -154,6 +155,90 @@ function mostrar(idusuario) {
 
 	});	
 }
+
+//Función para desactivar registros
+function eliminar_correo(idcorreo, nombre) {
+
+  crud_eliminar_papelera(
+    "../ajax/landing_correo.php?op=papelera",
+    "../ajax/landing_correo.php?op=eliminar", 
+    idcorreo, 
+    "!Elija una opción¡", 
+    `<b class="text-danger"><del>${nombre}</del></b> <br> En <b>papelera</b> encontrará este registro! <br> Al <b>eliminar</b> no tendrá acceso a recuperar este registro!`, 
+    function(){ sw_success('♻️ Papelera! ♻️', "Tu registro ha sido reciclado." ) }, 
+    function(){ sw_success('Eliminado!', 'Tu registro ha sido Eliminado.' ) }, 
+    function(){ tabla_correo.ajax.reload(null, false); },
+    false, 
+    false, 
+    false,
+    false
+  ); 
+}
+
+// .....::::::::::::::::::::::::::::::::::::: E S T A D I S T I C A  :::::::::::::::::::::::::::::::::::::::..
+var chart;
+function reporte_correo() {
+
+  $.post("../ajax/landing_correo.php?op=reporte", {},  function (e, textStatus, jqXHR) {
+    e = JSON.parse(e); //console.log(e);
+
+    // ::::::::::::::::: REPORTE DE DIAS :::::::::::::::::
+
+    e.data.chart_radar.dia.forEach((val, key) => {
+      if (val == 0) {
+        $(`.dia-semana-${key+1}`).html(val).removeClass('text-success').addClass('text-danger');
+      } else {
+        $(`.dia-semana-${key+1}`).html(val).removeClass('text-danger').addClass('text-success');
+      }      
+    });
+
+    // ::::::::::::::::: REPORTE MENSUAL  :::::::::::::::::
+
+    var options = {
+      series: [{
+        name: "Cantidad",
+        data: e.data.chart_linea.mes
+      }],
+      chart: {
+        height: 336,
+        type: 'line',
+        zoom: {	enabled: false },
+        dropShadow: {	enabled: true, enabledOnSeries: undefined,	top: 5,	left: 0, blur: 3, color: '#000', opacity: 0.1	},
+      },
+      dataLabels: {	enabled: false	},
+      legend: {	position: "top",	horizontalAlign: "center",	offsetX: -15,	fontWeight: "bold",	},
+      stroke: {	curve: 'smooth',	width: '3',	dashArray: [0, 5],	},
+      grid: {	borderColor: '#f2f6f7',	},
+      colors: ["rgb(132, 90, 223)", "rgba(132, 90, 223, 0.3)"],
+      yaxis: {
+        title: {
+          text: 'Cantidad de envios',
+          style: { color: '#adb5be',	fontSize: '14px',	fontFamily: 'poppins, sans-serif', fontWeight: 600, cssClass: 'apexcharts-yaxis-label',	},
+        },
+      },
+      xaxis: {
+        type: 'month',
+        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic'],
+        axisBorder: {	show: true,	color: 'rgba(119, 119, 142, 0.05)',	offsetX: 0,	offsetY: 0,	},
+        axisTicks: {	show: true,	borderType: 'solid',	color: 'rgba(119, 119, 142, 0.05)',	width: 6,	offsetX: 0,	offsetY: 0},
+        labels: {	rotate: -90	}
+      }
+    };
+    document.getElementById('nft-statistics').innerHTML = ''
+    chart = new ApexCharts(document.querySelector("#nft-statistics"), options);
+    chart.render();    
+    chart.updateOptions({ colors: [`rgb(${myVarVal})", "rgba(${myVarVal}, 0.3)`],  });
+  });
+
+}
+
+function nftStatistics() {
+  if (chart) {
+    chart.updateOptions({ colors: [`rgb(${myVarVal})", "rgba(${myVarVal}, 0.3)`],  });
+  }  
+}
+
+// .....::::::::::::::::::::::::::::::::::::: I N I T  :::::::::::::::::::::::::::::::::::::::..
 
 $(document).ready(function () {
   init();
