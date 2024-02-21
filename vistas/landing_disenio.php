@@ -16,20 +16,12 @@ if (!isset($_SESSION["user_nombre"])) {
     include("template/head.php"); ?>
 
     <style>
-      .custom-icon {
-        font-size: 40px;
-        color: #36E04B;
-      }
+      .custom-icon { font-size: 40px; color: #36E04B; }
 
-      .border-top {
-        border-top: 2px solid !important;
-      }
+      .border-top { border-top: 2px solid !important; }
 
-      .vertical-line {
-        border-left: 1px solid #000;
-        height: 30px;
-        margin-right: 0 auto;
-      }
+      .vertical-line { border-left: 1px solid #000; height: 30px; margin-right: 0 auto; }
+
     </style>
 
   </head>
@@ -74,6 +66,7 @@ if (!isset($_SESSION["user_nombre"])) {
           <section id="cuerpo-disenio-landing">
             <div class="card custom-card">
               <div class="card-body">
+                <div class="card-title p-2 unico bg-success text-center" style="display: none;">No hay datos disponibles. <b>!Registrar única vez!</b></div>
                 <form name="formulario" id="formulario" method="POST">
                   <div class="row" id="cargando-1-fomulario">
                     <!-- ID -->
@@ -102,13 +95,13 @@ if (!isset($_SESSION["user_nombre"])) {
                       </div>
                     </div>
 
-                    <!-- ----------------- IMAGEN --------------- -->
-                    <div class="col-md-9 p-3">
-                      <h5 class="card-title text-center">IMAGEN</h5>
+                    <!-- ----------------- IMAGEN FONDO --------------- -->
+                    <div class="col-md-5 p-3">
+                      <h5 class="card-title text-center">IMAGEN DE FONDO</h5>
                       <div class="col-md-12 border-top p-3">
 
                         <div class="d-flex justify-content-center align-items-center my-2">
-                          <div class="btn-group col-3" id="edit_img" style="display: none;">
+                          <div class="btn-group col-5" id="edit_img" style="display: none;">
                             <a class="btn btn-primary" id="doc1_i"><i class='bx bx-cloud-upload bx-tada fs-5'></i> Subir</a>
                             <input type="hidden" id="doc_old_1" name="doc_old_1" />
                             <input style="display: none;" id="doc1" type="file" name="doc1" accept="application/pdf, image/*" class="docpdf" />
@@ -118,12 +111,39 @@ if (!isset($_SESSION["user_nombre"])) {
 
                         <!-- imagen -->
                         <div id="doc1_ver" class="text-center ">
-                          <img id="img_fondo" src="" alt="" width="100%" />
+                          <img id="img_fondo" src="../assets/images/default/img_defecto2.png" alt="" width="78%" />
                         </div>
                         <div class="text-center" id="doc1_nombre" style="display: none;"><!-- aqui va el nombre del pdf --></div>
                       </div>
                     </div>
+
+
+
+                    <!-- ----------------- IMAGEN BONO --------------- -->
+                    <div class="col-md-4 p-3">
+                      <h5 class="card-title text-center">IMAGEN DE BONO</h5>
+                      <div class="col-md-12 border-top p-3">
+
+                        <div class="d-flex justify-content-center align-items-center my-2">
+                          <div class="btn-group col-6" id="edit_img2" style="display: none;">
+                            <a class="btn btn-primary" id="doc2_i"><i class='bx bx-cloud-upload bx-tada fs-5'></i> Subir</a>
+                            <input type="hidden" id="doc_old_2" name="doc_old_2" />
+                            <input style="display: none;" id="doc2" type="file" name="doc2" accept="application/pdf, image/*" class="docpdf" />
+                            <a class="btn btn-info" onclick="re_visualizacion(1, 'assets/images/landing_disenio/', '100%'); reload_zoom();"><i class='bx bx-refresh bx-spin fs-5'></i>Refrescar</a>
+                          </div>
+                        </div>
+
+                        <!-- imagen -->
+                        <div id="doc2_ver" class="text-center ">
+                          <img id="img_bono" src="../assets/images/default/img_defecto2.png" alt="" width="100%" />
+                        </div>
+                        <div class="text-center" id="doc2_nombre" style="display: none;"><!-- aqui va el nombre del pdf --></div>
+                      </div>
+                    </div>
+
                   </div>
+
+
 
                   <div class="row" id="cargando-2-fomulario" style="display: none;">
                     <div class="col-lg-12 text-center">
@@ -136,6 +156,7 @@ if (!isset($_SESSION["user_nombre"])) {
                 <div class="card-footer d-flex justify-content-end">
                   <button class="btn btn-warning editar" id="edit" onclick="activar_editar(1);">Editar</button>
                   <a class="btn btn-primary actualizar" type="submit" id="actualizar_registro" style="display: none;">Actualizar</a>
+                  <a class="btn btn-primary registra_unico" style="display: none;" onclick="registrar_unico();">Guardar</a>
                 </div>
               </div>
             </div>
