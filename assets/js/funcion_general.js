@@ -557,7 +557,7 @@ function addImage(e, id, img_default='') {
 			toastr.error('Este tipo de ARCHIVO no esta permitido <br> elija formato: <b>.png .jpeg .jpg .webp etc... </b>');
 
 			if (img_default == '' || img_default == null || img_default == false || img_default == true ) {
-        $("#"+id+"_i").attr("src", "../dist/img/default/img_defecto.png");
+        $("#"+id+"_i").attr("src", "../assets/images/default/img_defecto.png");
       } else {
         $("#"+id+"_i").attr("src", img_default);
       }
@@ -575,7 +575,7 @@ function addImage(e, id, img_default='') {
               file.name +
               '</div>'+
               '<div class="col-md-12">'+
-              '<button  class="btn btn-danger  btn-block" onclick="'+id+'_eliminar();" style="padding:0px 12px 0px 12px !important;" type="button" ><i class="far fa-trash-alt"></i></button>'+
+              '<button class="btn btn-danger  btn-block" onclick="'+id+'_eliminar();" style="padding:0px 12px 0px 12px !important;" type="button" ><i class="far fa-trash-alt"></i></button>'+
               '</div>'+
             '</div>'+
 					'');
@@ -735,7 +735,7 @@ function re_visualizacion(id,  url_carpeta, width='100%', height='310') {
         timer: 1500
       })
 
-      $("#doc"+id+"_ver").html('<img src="../dist/svg/pdf_trasnparent.svg" alt="" width="50%" >');
+      $("#doc"+id+"_ver").html('<img src="../assets/svg/pdf_trasnparent.svg" alt="" width="50%" >');
 
 		  $("#doc"+id+"_nombre").html("");
 
@@ -1034,7 +1034,7 @@ function buscar_sunat_reniec(input='') {
     if (tipo_doc == "RUC") {
 
       if (dni_ruc.length == "11") {
-        $.post("../ajax/ajax_general.php?op=sunat", { ruc: dni_ruc }, function (data, status) {
+        $.post("../ajax/ajax_general.php?op=sunat_jdl", { ruc: dni_ruc }, function (data, status) {
 
           data = JSON.parse(data);    console.log(data);
 
