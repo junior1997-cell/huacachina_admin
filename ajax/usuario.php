@@ -59,15 +59,15 @@ switch ($_GET["op"]) {
     break;
 
   case 'desactivar':
-    $rspta = $usuario->desactivar($idusuario);
-    echo $rspta ? "Usuario Desactivado" : "Usuario no se puede desactivar";
-    break;
+    $rspta = $usuario->desactivar($_GET["id_tabla"]);
+    echo json_encode( $rspta, true) ;
+  break;
 
 
-  case 'activar':
-    $rspta = $usuario->activar($idusuario);
-    echo $rspta ? "Usuario activado" : "Usuario no se puede activar";
-    break;
+  case 'delete':
+    $rspta = $usuario->delete($_GET["id_tabla"]);
+    echo json_encode( $rspta, true) ;
+  break;
 
 
   case 'mostrar':
@@ -86,7 +86,7 @@ switch ($_GET["op"]) {
   case 'listar':
     $rspta = $usuario->listar();
     //Vamos a declarar un array
-    echo json_encode($rspta);
+    // echo json_encode($rspta);
     $data = array();
 
     foreach ($rspta['data'] as $key => $reg) {
@@ -104,14 +104,12 @@ switch ($_GET["op"]) {
       $data[] = array(
         "0" => '<div class="hstack gap-2 fs-15">' .
           '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>' .
-          ($reg->condicion ? '<button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="desactivar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>' :
-            '<button class="btn btn-icon btn-sm btn-success-light product-btn" onclick="activar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>'
-          ) .
+          ' <button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar(' . $reg['idusuario'] . ', \''.encodeCadenaHtml($reg['nombre_usuario']).'\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>'.
           '</div>',
         "1" => '<div class="d-flex flex-fill align-items-center">
           <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img src="../assets/modulo/usuario/perfil/' . $img . '" alt=""> </span></div>
           <div>
-            <span class="d-block fw-semibold text-primary">' . $reg['nombre'] . ' </span>
+            <span class="d-block fw-semibold text-primary">' . $reg['nombre_usuario'] . ' </span>
             <span class="text-muted">' . $reg['tipo_documento'] . ' ' . $reg['num_documento'] . '</span>
           </div>
         </div>',
@@ -119,7 +117,7 @@ switch ($_GET["op"]) {
         "3" => $cargo,
         "4" => $reg['telefono'],
         "5" => $reg['email'],
-        "6" => ($reg->condicion) ? '<span class="badge bg-success-transparent">Activado</span>' : '<span class="badge bg-danger-transparent">Inhabilitado</span>'
+        "6" => ($reg['condicion']) ? '<span class="badge bg-success-transparent">Activado</span>' : '<span class="badge bg-danger-transparent">Inhabilitado</span>'
       );
     }
     $results = array(
@@ -130,7 +128,30 @@ switch ($_GET["op"]) {
     );
     echo json_encode($results);
 
-    break;
+  break;
+
+  
+  case 'select2persona':
+
+    $rspta = $usuario->select_persona();  $data = "";
+
+    if ($rspta['status']) {
+
+      foreach ($rspta['data'] as $key => $value) {
+        $data  .= '<option value=' . $value['idpersona'] . ' title="'.$value['foto_perfil'].'">' . $value['nombres'] . ' - ' . $value['numero_documento'] . '</option>';
+      }
+  
+      $retorno = array(
+        'status' => true, 
+        'message' => 'Salió todo ok', 
+        'data' => $data, 
+      );
+
+      echo json_encode($retorno, true);
+    } else {
+      echo json_encode($rspta, true);
+    }    
+  break;   
 
   case 'permisos':
     //Obtenemos todos los permisos de la tabla permisos
@@ -162,7 +183,7 @@ switch ($_GET["op"]) {
       echo '</div>';
     }
     echo '</div>';
-    break;
+  break;
 
   case 'permisosEmpresa':
     //Obtenemos todos los permisos de la tabla permisos

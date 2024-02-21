@@ -106,8 +106,8 @@
             <?php  if ($_SESSION['usuario'] == '1') { ?>
             <li class="slide"><a href="usuario.php" class="side-menu__item">Usuarios</a></li>     
             <?php } ?>       
-            <?php  if ($_SESSION['permisos'] == '1') { ?>
-            <li class="slide"><a href="usuario.php" class="side-menu__item">Permisos</a></li>     
+            <?php  if ($_SESSION['usuario'] == '1') { ?>
+            <li class="slide"><a href="persona.php" class="side-menu__item">Persona</a></li>     
             <?php } ?>  
             <?php  if ($_SESSION['cargos'] == '1') { ?>
             <li class="slide"><a href="usuario.php" class="side-menu__item">Cargos</a></li>     
