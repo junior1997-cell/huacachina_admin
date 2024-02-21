@@ -15,7 +15,7 @@ Class Ajax_general
 
   // ══════════════════════════════════════ RENIEC JDL ══════════════════════════════════════
   public function datos_reniec_jdl($dni) { 
-
+// var_dump($dni);die();
     $url = "https://dniruc.apisperu.com/api/v1/dni/".$dni."?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imp1bmlvcmNlcmNhZG9AdXBldS5lZHUucGUifQ.bzpY1fZ7YvpHU5T83b9PoDxHPaoDYxPuuqMqvCwYqsM";
     
     $curl = curl_init();                              //  Iniciamos curl    

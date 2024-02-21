@@ -3,7 +3,7 @@
 
   if (strlen(session_id()) < 1) {  session_start();  }//Validamos si existe o no la sesión
 
-  if (!isset($_SESSION["nombre"])) {
+  if (!isset($_SESSION["user_nombre"])) {
 
     $retorno = ['status'=>'login', 'message'=>'Tu sesion a terminado pe, inicia nuevamente', 'data' => [] ];
     echo json_encode($retorno);  //Validamos el acceso solo a los usuarios logueados al sistema.
@@ -11,10 +11,10 @@
   } else {     
     
     require_once "../modelos/Ajax_general.php";
-    require_once "../modelos/Ubigeo.php";
+    // require_once "../modelos/Ubigeo.php";
     
     $ajax_general = new Ajax_general($_SESSION['idusuario']);
-    $_ubigeo 			= new Ubigeo();
+    // $_ubigeo 			= new Ubigeo();
 
     $scheme_host  =  ($_SERVER['HTTP_HOST'] == 'localhost' ? 'http://localhost/sunat_ventas_jdl/' :  $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'].'/');
     $imagen_error = "this.src='../dist/svg/404-v2.svg'";

@@ -98,13 +98,13 @@ class Usuario
 
 	//Implementamos un método para desactivar usuario
 	public function desactivar($idusuario) {
-		$sql = "UPDATE usuario set condicion='0' where idusuario='$idusuario'";
+		$sql = "UPDATE usuario set estado='0' where idusuario='$idusuario'";
 		return ejecutarConsulta($sql);
 	}
 
-	//Implementamos un método para activar usuario
-	public function activar($idusuario)	{
-		$sql = "UPDATE usuario set condicion='1' where idusuario='$idusuario'";
+	//Implementamos un método para eliminar usuario
+	public function delete($idusuario)	{
+		$sql = "UPDATE usuario set estado_delete='0' where idusuario='$idusuario'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -125,16 +125,28 @@ class Usuario
 	//Implementar un método para listar los registros
 	public function listar()	{
 		$sql = "SELECT u.idusuario, p.nombres as nombre_usuario, p.tipo_documento, p.numero_documento as num_documento, 
-		p.celular as telefono, p.correo as email, ct.nombre as cargo, p.foto_perfil as imagen, u.login , u.estado
+		p.celular as telefono, p.correo as email, ct.nombre as cargo, p.foto_perfil as imagen, u.login , u.estado as condicion
 		from usuario u 
 		INNER JOIN persona p on p.idpersona=u.idpersona 
-		INNER JOIN cargo_trabajador ct on p.idcargo_trabajador=ct.idcargo_trabajador";
+		INNER JOIN cargo_trabajador ct on p.idcargo_trabajador=ct.idcargo_trabajador 
+		where u.estado='1' and u.estado_delete='1'";
 		return ejecutarConsulta($sql);
 	}
+	
 	//Implementar un método para listar los registros y mostrar en el select
 	public function select()	{
 		$sql = "SELECT * from usuario where condicion=1";
 		return ejecutarConsulta($sql);
+	}
+
+	//Implementar un método para listar los registros y mostrar en el select
+	public function select_persona()	{
+		$sql = "SELECT p.idpersona, p.nombres, p.numero_documento,p.foto_perfil, ct.nombre as cargo 
+		FROM persona p 
+		LEFT JOIN usuario u ON p.idpersona = u.idpersona 
+		INNER JOIN cargo_trabajador ct ON p.idcargo_trabajador = ct.idcargo_trabajador
+		WHERE p.estado = '1' AND p.estado_delete = '1' AND u.idpersona IS NULL;";
+		return ejecutarConsultaArray($sql);
 	}
 
 	//Implementar un metodo para listar los permisos marcados
