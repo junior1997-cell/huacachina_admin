@@ -24,7 +24,7 @@ function limpiar_form() {
 	$("#direccion").val("");
 	$("#telefono").val("");
 	$("#email").val("");
-	$("#cargo").val("");
+	$("#cargo").val("").trigger("change");
 	$("#edad").val("");
 	$(".edad").html("");
 	$("#nacimiento").val("");	

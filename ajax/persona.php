@@ -34,9 +34,9 @@ switch ($_GET["op"]) {
     if (!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name'])) {
 
       $imagen = $_POST["imagenactual"]; $flat_img1 = false;
-      // echo json_encode('si '.$imagen, true); die();
+
     } else {
-      //  echo json_encode('NO '.$imagen, true); die();
+
       $ext = explode(".", $_FILES["imagen"]["name"]); $flat_img1 = true;
 
       if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png") {
@@ -48,7 +48,6 @@ switch ($_GET["op"]) {
       }
     }
      
-    // echo json_encode('NO '.$imagen, true); die();
     if (empty($idpersona)) {
 
       $rspta = $persona->insertar($nombres, $tipo_documento, $num_documento, $direccion, $telefono, $email, 
@@ -56,19 +55,21 @@ switch ($_GET["op"]) {
       echo json_encode($rspta, true);
 
     } else {
-      echo json_encode('NO '.$idpersona.' - '.$imagen, true); die();
+
       // validamos si existe LA IMG para eliminarlo
-      if ($flat_img1 == true) {
+      if ($flat_img1 == true || empty($imagen)) {
         
         $datos_f1 = $persona->obtenerImg($idpersona);
         $img1_ant = $datos_f1['data']['foto_perfil'];
-        //  echo json_encode( $img1_ant, true); die();
+        
         if ( !empty($img1_ant) ) { unlink("../assets/modulo/persona/" . $img1_ant);  }
+
       }            
       
       $rspta = $persona->editar($idpersona, $nombres, $tipo_documento, $num_documento, $direccion,$telefono, $email, 
       $cargo, $idtipo_persona, $nacimiento,$edad, $imagen);
       echo json_encode($rspta, true);
+      
     }
   break;
 

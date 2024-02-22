@@ -111,12 +111,14 @@ if (!isset($_SESSION["user_nombre"])) {
                   <div class="tab-pane fade show active text-muted" id="dato-usuario-pane" role="tabpanel" tabindex="0">
                     <div class="row gy-2" id="cargando-1-fomulario">
                       <!-- id usuario -->
-
+                      <b class="trabajador-name"></b>
+                      <input type="hidden" class="" id="idusuario" name="idusuario">
                       <!-- Cargo -->
                       <div class="col-md-8">
                         <div class="form-group">
                           <label for="id_persona" class="form-label">Nombre:</label>
-                          <select class="form-control" name="id_persona" id="id_persona"> </select>
+                          <select class="form-control select2" name="id_persona" id="id_persona" onchange="capt_cargo();"> </select>
+                          <input type="text" name="persona_old" id="persona_old">
                         </div>
                       </div>
 
@@ -124,11 +126,8 @@ if (!isset($_SESSION["user_nombre"])) {
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="cargo" class="form-label">Cargo:</label>
-                          <select class="form-control" name="cargo" id="cargo">
-                            <option value="1">Ninguno</option>
-                            <option value="2">Administrador</option>
-                            <option value="3">Secretaria</option>
-                          </select>
+                          <input type="text" class=" form-control cargo_persona" readonly style="display: none;">
+                          <input type="text" class=" form-control cargo_persona_edit" readonly >
                         </div>
                       </div>
                       <!-- Usuario -->
@@ -145,6 +144,7 @@ if (!isset($_SESSION["user_nombre"])) {
                           <div class="input-group mb-3">
                             <input type="password" class="form-control" name="clave" id="clave" required placeholder="Contraseña" aria-describedby="icon-view-password">
                             <button class="btn btn-primary" type="button" onclick="ver_password(this);" id="icon-view-password"><i class="fa-solid fa-eye"></i></button>
+                            <input type="hidden" name="password-old"   id="password-old"  >
                           </div>
                         </div>
                       </div>
@@ -166,7 +166,7 @@ if (!isset($_SESSION["user_nombre"])) {
                     </div>
                   </div>
                 </div>
-                <!-- Chargue -->
+                <!-- Chargue  -->
                 <div class="p-l-25px col-lg-12" id="barra_progress_usuario_div" style="display: none;">
                   <div class="progress progress-lg custom-progress-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     <div id="barra_progress_usuario" class="progress-bar" style="width: 0%">

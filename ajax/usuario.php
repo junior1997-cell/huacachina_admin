@@ -13,33 +13,19 @@ $date_now = date("d_m_Y__h_i_s_A");
 $imagen_error = "this.src='../dist/svg/404-v2.svg'";
 $toltip = '<script> $(function () { $(\'[data-toggle="tooltip"]\').tooltip(); }); </script>';
 
+$id_persona = isset($_POST["id_persona"]) ? limpiarCadena($_POST["id_persona"]) : "";
+$persona_old = isset($_POST["persona_old"]) ? limpiarCadena($_POST["persona_old"]) : "";
 $idusuario = isset($_POST["idusuario"]) ? limpiarCadena($_POST["idusuario"]) : "";
+$login      = isset($_POST["login"]) ? limpiarCadena($_POST["login"]) : "";
+$clave      = isset($_POST["clave"]) ? limpiarCadena($_POST["clave"]) : "";
+// $clave_old      = isset($_POST["password-old"]) ? limpiarCadena($_POST["password-old"]) : "";
+$permiso          = isset($_POST['permiso']) ? $_POST['permiso'] : "";
 
-$nombre = isset($_POST["nombre"]) ? limpiarCadena($_POST["nombre"]) : "";
-$apellidos = isset($_POST["apellidos"]) ? limpiarCadena($_POST["apellidos"]) : "";
-$tipo_documento = isset($_POST["tipo_documento"]) ? limpiarCadena($_POST["tipo_documento"]) : "";
-$num_documento = isset($_POST["num_documento"]) ? limpiarCadena($_POST["num_documento"]) : "";
-$direccion = isset($_POST["direccion"]) ? limpiarCadena($_POST["direccion"]) : "";
-$telefono = isset($_POST["telefono"]) ? limpiarCadena($_POST["telefono"]) : "";
-$email = isset($_POST["email"]) ? limpiarCadena($_POST["email"]) : "";
-$cargo = isset($_POST["cargo"]) ? limpiarCadena($_POST["cargo"]) : "";
-$login = isset($_POST["login"]) ? limpiarCadena($_POST["login"]) : "";
-$clave = isset($_POST["clave"]) ? limpiarCadena($_POST["clave"]) : "";
-$imagen = isset($_POST["imagen"]) ? limpiarCadena($_POST["imagen"]) : "";
-
+$imagen            = isset($_POST["imagen"]) ? limpiarCadena($_POST["imagen"]) : "";
 
 switch ($_GET["op"]) {
   case 'guardaryeditar':
 
-    if (!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name'])) {
-      $imagen = $_POST["imagenactual"];
-    } else {
-      $ext = explode(".", $_FILES["imagen"]["name"]);
-      if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png") {
-        $imagen = $date_now . '__' . random_int(0, 20) . round(microtime(true)) . random_int(21, 41) . '.' . end($ext);
-        move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/usuarios/" . $imagen);
-      }
-    }
     if (empty($clave)) {
       // Si la variable $clave está vacía, se obtiene la clave actual del usuario y se usa para actualizar el registro
       $usuario_actual = $usuario->mostrar($idusuario);
@@ -50,31 +36,30 @@ switch ($_GET["op"]) {
     }
 
     if (empty($idusuario)) {
-      $rspta = $usuario->insertar($nombre, $apellidos, $tipo_documento, $num_documento, $direccion, $telefono, $email, $cargo, $login, $clavehash, $imagen, $_POST['permiso'], $_POST['serie'], $_POST['empresa']);
+      $rspta = $usuario->insertar($id_persona, $login, $clavehash, $permiso);
       echo json_encode($rspta, true);
     } else {
-      $rspta = $usuario->editar($idusuario, $nombre, $apellidos, $tipo_documento, $num_documento, $direccion, $telefono, $email, $cargo, $login, $clavehash, $imagen, $_POST['permiso'], $_POST['serie'], $_POST['empresa']);
+      $rspta = $usuario->editar($idusuario, $id_persona,$persona_old, $login, $clavehash, $permiso);
       echo json_encode($rspta, true);
     }
     break;
 
   case 'desactivar':
     $rspta = $usuario->desactivar($_GET["id_tabla"]);
-    echo json_encode( $rspta, true) ;
-  break;
+    echo json_encode($rspta, true);
+    break;
 
 
   case 'delete':
     $rspta = $usuario->delete($_GET["id_tabla"]);
-    echo json_encode( $rspta, true) ;
-  break;
+    echo json_encode($rspta, true);
+    break;
 
 
   case 'mostrar':
     $rspta = $usuario->mostrar($idusuario);
-    //Codificar el resultado utilizando json
     echo json_encode($rspta, true);
-    break;
+  break;
 
   case 'validar_usuario':
     $rspta = $usuario->validar_usuario($_GET["idusuario"], $_GET["login"]);
@@ -93,10 +78,18 @@ switch ($_GET["op"]) {
       // Mapear el valor numérico a su respectiva descripción
       $cargo = '';
       switch ($reg['cargo']) {
-        case 0: $cargo = "Administrador"; break;
-        case 1: $cargo = "Ventas"; break;
-        case 2: $cargo = "Logistica"; break;
-        case 3: $cargo = "Contabilidad"; break;
+        case 0:
+          $cargo = "Administrador";
+          break;
+        case 1:
+          $cargo = "Ventas";
+          break;
+        case 2:
+          $cargo = "Logistica";
+          break;
+        case 3:
+          $cargo = "Contabilidad";
+          break;
       }
 
       $img = empty($reg['imagen']) ? 'no-perfil.jpg' : $reg['imagen'];
@@ -104,7 +97,7 @@ switch ($_GET["op"]) {
       $data[] = array(
         "0" => '<div class="hstack gap-2 fs-15">' .
           '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar(' . $reg['idusuario'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>' .
-          ' <button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar(' . $reg['idusuario'] . ', \''.encodeCadenaHtml($reg['nombre_usuario']).'\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>'.
+          ' <button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar(' . $reg['idusuario'] . ', \'' . encodeCadenaHtml($reg['nombre_usuario']) . '\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>' .
           '</div>',
         "1" => '<div class="d-flex flex-fill align-items-center">
           <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img src="../assets/modulo/usuario/perfil/' . $img . '" alt=""> </span></div>
@@ -128,30 +121,31 @@ switch ($_GET["op"]) {
     );
     echo json_encode($results);
 
-  break;
+    break;
 
-  
+
   case 'select2persona':
 
-    $rspta = $usuario->select_persona();  $data = "";
+    $rspta = $usuario->select_persona();
+    $data = "";
 
     if ($rspta['status']) {
 
       foreach ($rspta['data'] as $key => $value) {
-        $data  .= '<option value=' . $value['idpersona'] . ' title="'.$value['foto_perfil'].'">' . $value['nombres'] . ' - ' . $value['numero_documento'] . '</option>';
+        $data  .= '<option value=' . $value['idpersona'] . ' title="' . $value['foto_perfil'] . '" cargo="' . $value['cargo'] . '">' . $value['nombres'] . ' - ' . $value['numero_documento'] . '</option>';
       }
-  
+
       $retorno = array(
-        'status' => true, 
-        'message' => 'Salió todo ok', 
-        'data' => $data, 
+        'status' => true,
+        'message' => 'Salió todo ok',
+        'data' => $data,
       );
 
       echo json_encode($retorno, true);
     } else {
       echo json_encode($rspta, true);
-    }    
-  break;   
+    }
+    break;
 
   case 'permisos':
     //Obtenemos todos los permisos de la tabla permisos
@@ -183,7 +177,7 @@ switch ($_GET["op"]) {
       echo '</div>';
     }
     echo '</div>';
-  break;
+    break;
 
   case 'permisosEmpresa':
     //Obtenemos todos los permisos de la tabla permisos
@@ -393,7 +387,7 @@ switch ($_GET["op"]) {
       $_SESSION['user_cargo']     = $cargo;
       $_SESSION['user_imagen']    = $rspta['data']['imagen'];
       $_SESSION['user_login']     = $rspta['data']['login'];
-    
+
 
       $marcados = $usuario->listarmarcados($rspta['data']['idusuario']);         # Obtenemos los permisos del usuario
       $grupo    = $usuario->listar_grupo_marcados($rspta['data']['idusuario']);  # Obtenemos los permisos del usuario
