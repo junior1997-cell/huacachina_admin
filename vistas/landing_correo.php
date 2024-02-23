@@ -93,7 +93,7 @@
                 <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                   <div class="card custom-card">
                     <div class="card-header justify-content-between flex-wrap">
-                      <div class="card-title"> Estatistica correo </div>
+                      <div class="card-title"> Estadistica correo </div>
                       <!-- <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-primary btn-sm btn-wave">1D</button>
                         <button type="button" class="btn btn-primary-light btn-sm btn-wave">1W</button>
