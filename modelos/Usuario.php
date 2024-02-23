@@ -219,7 +219,7 @@ class Usuario
 		from usuario u 
 		INNER JOIN persona p on p.idpersona=u.idpersona 
 		INNER JOIN cargo_trabajador ct on p.idcargo_trabajador=ct.idcargo_trabajador 
-		where u.login='$login' and u.password='$clave' and u.estado='1';";
+		where u.login='$login' and u.password='$clave' and u.estado='1' and  u.estado_delete='1';";
 
 		return ejecutarConsultaSimpleFila($sql);
 		// $info =  ejecutarConsultaSimpleFila($sql); 

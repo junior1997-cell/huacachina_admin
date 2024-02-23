@@ -118,7 +118,7 @@ if (!isset($_SESSION["user_nombre"])) {
                         <div class="form-group">
                           <label for="id_persona" class="form-label">Nombre:</label>
                           <select class="form-control select2" name="id_persona" id="id_persona" onchange="capt_cargo();"> </select>
-                          <input type="text" name="persona_old" id="persona_old">
+                          <input type="hidden" name="persona_old" id="persona_old">
                         </div>
                       </div>
 

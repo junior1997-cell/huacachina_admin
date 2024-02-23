@@ -109,12 +109,6 @@
             <?php  if ($_SESSION['usuario'] == '1') { ?>
             <li class="slide"><a href="persona.php" class="side-menu__item">Persona</a></li>     
             <?php } ?>  
-            <?php  if ($_SESSION['cargos'] == '1') { ?>
-            <li class="slide"><a href="usuario.php" class="side-menu__item">Cargos</a></li>     
-            <?php } ?>  
-            <?php  if ($_SESSION['tipo_persona'] == '1') { ?>
-            <li class="slide"><a href="usuario.php" class="side-menu__item">Tipo Persona</a></li>     
-            <?php } ?>  
 
           </ul>
         </li>
