@@ -1,7 +1,6 @@
 <?php
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion_v2.php";
-// require "../config/Conexion_W.php";
 
 class Reportes_correo
 {
@@ -62,24 +61,25 @@ class Reportes_correo
     $currentYear = date("Y");
     for ($i = 0; $i < 5; $i++) {
         $year = $currentYear - $i;
-
         $sql_6 = "SELECT COUNT(idlanding_correo) as cantidad, YEAR(fecha_envio) as anio_name_abreviado, YEAR(fecha_envio) as anio_name
-                  FROM landing_correo  
-                  WHERE YEAR(fecha_envio)='$year' AND estado='1' AND estado_delete='1';";
-
-        $anio = ejecutarConsultaSimpleFila($sql_6);
-        
-        if ($anio['status'] == false) {
-            return $anio;
-        }
-
-        // Añadir la cantidad al principio del array
+        FROM landing_correo WHERE YEAR(fecha_envio)='$year' AND estado='1' AND estado_delete='1';";
+        $anio = ejecutarConsultaSimpleFila($sql_6); if ($anio['status'] == false) { return $anio; }
         array_unshift($data_barra_anio, (empty($anio['data']) ? 0 : (empty($anio['data']['cantidad']) ? 0 : floatval($anio['data']['cantidad'])))); 
     }
+
+
+    // ---------- Lista de años ----------
+    $data_list_anio = [];
+    $sql_7 ="SELECT DISTINCT EXTRACT(YEAR FROM fecha_envio) AS anio
+    FROM landing_correo where estado = '1' AND estado_delete = '1';";
+    $list_anios = ejecutarConsulta($sql_7); if ($list_anios['status'] == false) { return $list_anios; }
+    foreach ($list_anios['data'] as $row) { array_push($data_list_anio, $row['anio']); }
+    $grupos = array_chunk($data_list_anio, 5);
 
     $results = [
       "status" => true,
       "data" => [
+        "lista_anios" => ["lista" =>$data_list_anio, "grupos" => $grupos],
         "total_registros" => $total_registros,
         "chat_rct" => ["reciente" => $total_reciente, "porsentaje"=> $porsentaje],
         "chart_radar" => [ 'dia'  => $data_x_dia, 'vista_all'  => $vista_all  ],
@@ -91,26 +91,9 @@ class Reportes_correo
     return $results;
   }
 
-//   function reportes_wordpress(){
-    
-//     $data_x_dia2 = []; $vista_all2 = [];
-// 		for ($i=0; $i <= 6 ; $i++) { 
-// 			$sql_4 = "SELECT COUNT(form_id) as cantidad, 
-// 			FROM landing_correo  WHERE WEEKDAY(form_date)='$i' ";
-// 			$dia = ejecutarConsultaSimpleFila_W($sql_4); if ($dia['status'] == false) { return $dia; }
-// 			array_push($data_x_dia2, (empty($dia['data']) ? 0 : (empty($dia['data']['cantidad']) ? 0 : floatval($dia['data']['cantidad']) ) ));         
-// 			array_push($vista_all2, $dia['data'] );         
-// 		}
-//     $results = [
-//       "status" => true,
-//       "data" => [
-//         "chart_radar" => [ 'dia'  => $data_x_dia2, 'vista_all'  => $vista_all2  ],
-//       ],
-//       "message" => 'Todo oka'
-//     ];
-//     return $results;
-// }
+  
 
 
 
 }
+?>

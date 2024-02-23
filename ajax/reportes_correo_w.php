@@ -11,9 +11,9 @@ if (!isset($_SESSION["user_nombre"])) {
 
   if ($_SESSION['dashboard'] == 1) {
 
-    require_once "../modelos/Reportes_correo.php";
+    require_once "../modelos/Reportes_correo_w.php";
 
-    $reportes  = new Reportes_correo($_SESSION['idusuario']);
+    $reportes  = new Reportes_correo_w($_SESSION['idusuario']);
 
     date_default_timezone_set('America/Lima');
     $date_now = date("d_m_Y__h_i_s_A");
@@ -22,12 +22,12 @@ if (!isset($_SESSION["user_nombre"])) {
 
     switch ($_GET["op"]) {
 
-      case 'reporte_correo_1':    
-        $rspta = $reportes->reportes_local();
+      case 'reporte_correo_w':    
+        $rspta = $reportes->reportes_wordpress('1568');
         echo json_encode($rspta, true);    
       break; 
 
-      
+
       default:
         $rspta = ['status' => 'error_code', 'message' => 'Te has confundido en escribir en el <b>swich.</b>', 'data' => []];
         echo json_encode($rspta, true);

@@ -19,9 +19,7 @@ if (!isset($_SESSION["user_nombre"])) {
 
   </head>
 
-  <!-- <body idusuario="<?php //echo $_SESSION["idempresa"];
-                        ?>" reporte="<?php //echo $_SESSION["reporte"];
-                                                                          ?>" > -->
+  <!-- <body idusuario="<?php //echo $_SESSION["idempresa"]; ?>" reporte="<?php //echo $_SESSION["reporte"]; ?>" > -->
 
   <body>
     <?php include("template/switcher.php"); ?>
@@ -45,21 +43,26 @@ if (!isset($_SESSION["user_nombre"])) {
             <div class="row">
               <!-- ------------ Emcabezado ------------------- -->
               <div class="my-4">
-                <p class="fw-semibold fs-18 mb-0">Reportes del correo Landing Page</p>
-                <span class="fs-semibold text-muted">semanal - mensual - anual</span>
+               
+                    <p class="fw-semibold fs-18 mb-0">Reportes del correo Landing Page</p>
+                    <span class="fs-semibold text-muted">semana - mes - año</span>
+              
               </div>
 
-              <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12 col-sm-12">
 
+              <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <!-- ----------- REPORTE SEMANAL ---------------- -->
                 <div class="row">
                   <div class="card custom-card crm-highlight-card">
                     <!-- ------- titulo ------- -->
-                    <div class="card-header justify-content-between flex-wrap">
+                    <div class="card-header justify-content-left flex-wrap">
                       <span class="avatar avatar-md avatar-rounded bg-green text-gray-200">
                         <i class="ti ti-calendar fs-20"></i>
                       </span>
-                      <div class="flex-fill fw-semibold fs-18 text-fixed-white mb-2"> Reporte Semanal </div>
+                      <div>
+                        <div class="flex-fill fw-semibold fs-18 text-fixed-white"> Reporte Semanal</div>
+                        <a href="#" class=" fs-12" id="mes_seleccionado">Todos</a>
+                      </div>
                     </div>
                     <!-- ----------- grafica -------- -->
                     <div class="card-body p-2">
@@ -96,7 +99,7 @@ if (!isset($_SESSION["user_nombre"])) {
                   </div>
                 </div>
 
-                <!-- ------------------- REPORTE 24 HORAS --------------- -->
+                <!-- ----------- REPORTE 24 HORAS --------------- -->
                 <div class="row">
                   <div class="card custom-card overflow-hidden">
                     <div class="card-body">
@@ -128,16 +131,15 @@ if (!isset($_SESSION["user_nombre"])) {
                     </div>
                   </div>
                 </div>
-                  
               </div>
-              
 
-              <!-- ----------- REPORTE MENSUAL ---------------- -->
+              <!-- ------------- REPORTE MENSUAL ---------------- -->
               <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <div class="card custom-card">
                   <!-- ------- titulo ------- -->
                   <div class="card-header justify-content-between flex-wrap">
                     <div class="card-title"> Reporte Mensual </div>
+                    <a href="#" class="p-2 fs-12 text-muted" id="anio_seleccionado">Todos</a>
                   </div>
                   <!-- ----------- grafica -------- -->
                   <div class="card-body p-0">
@@ -148,11 +150,19 @@ if (!isset($_SESSION["user_nombre"])) {
                 </div>
               </div>
 
-              <!-- ----------- REPORTE ANUAL ---------------- -->
+              <!-- ------------- REPORTE ANUAL ------------------ -->
               <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <div class="card custom-card">
                   <div class="card-header justify-content-between flex-wrap">
-                    <div class="card-title">Reporte Anual</div>  
+                    <div class="card-title">Reporte Anual</div> 
+                    <div class="dropdown">
+                      <a href="javascript:void(0);" class="p-2 fs-12 text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                          Más reciente<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" id="grupos_anios">
+                        <!-- listar los grupos de 5 en 5 mostrando "primero - ultimo" -->
+                      </ul>
+                    </div> 
                   </div>
                   <div class="card-body py-0">
                     <div class="p-3 text-center" id="crm-profits-earned"></div>
@@ -168,19 +178,19 @@ if (!isset($_SESSION["user_nombre"])) {
           <!-- Start::Section Correo-2-->
           <section id="correo-2">
             <div class="row">
-              <!-- ------------ Emcabezado ------------------- -->
+              <!-- --------------- Emcabezado ------------------- -->
               <div class=" my-4">
                 <p class="fw-semibold fs-18 mb-0">Reportes de Correo WordPress</p>
-                <span class="fs-semibold text-muted">semana - mensual - anual</span>
+                <span class="fs-semibold text-muted">semana - mes - año</span>
               </div>
 
-              <!-- ----------- REPORTE SEMANAL ---------------- -->
               <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+                <!-- ------------ REPORTE SEMANAL --------------- -->
                 <div class="row">
-                  <div class="card custom-card crm-highlight-card">
+                  <div class="card custom-card " style="background-color: #6f42c1;">
                     <!-- ------- titulo ------- -->
                     <div class="card-header justify-content-between flex-wrap">
-                      <span class="avatar avatar-md avatar-rounded bg-green text-gray-200">
+                      <span class="avatar avatar-md avatar-rounded" style="background-color: #AB5FE3;">
                         <i class="ti ti-calendar fs-20"></i>
                       </span>
                       <div class="flex-fill fw-semibold fs-18 text-fixed-white mb-2"> Reporte Semanal </div>
@@ -219,9 +229,42 @@ if (!isset($_SESSION["user_nombre"])) {
                     </div>
                   </div>
                 </div>
+
+                <!-- ------------ REPORTE 24 HORAS -------------- -->
+                <div class="row">
+                  <div class="card custom-card overflow-hidden">
+                    <div class="card-body">
+                      <div class="d-flex align-items-top justify-content-between">
+                        <div>
+                          <span class="avatar avatar-md avatar-rounded " style="background-color: #AB5FE3;">
+                            <i class="ti ti-users fs-16"></i>
+                          </span>
+                        </div>
+                        <div class="flex-fill ms-3">
+                          <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            <div>
+                              <p class="text-muted mb-0">Últimas 24 Horas</p>
+                              <h4 class="fw-semibold mt-1" id="recientesW"> <!-- Datos 24H --> </h4>
+                            </div>
+                            <div id="crm-total-customers"></div>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div>
+                              <!-- <a class="text-primary" href="javascript:void(0);">View All<i class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a> -->
+                            </div>
+                            <div class="text-end">
+                              <p class="mb-0 text-success fw-semibold" id="porsentajeW"></p>
+                              <span class="text-muted op-7 fs-11">este año</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <!-- ----------- Reporte Mensual ---------------- -->
+              <!-- -------------- REPORTE MENSUAL ---------------- -->
               <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <div class="card custom-card">
                   <!-- ------- titulo ------- -->
@@ -230,25 +273,21 @@ if (!isset($_SESSION["user_nombre"])) {
                   </div>
                   <!-- ----------- grafica -------- -->
                   <div class="card-body p-0">
-                    <div id="nft-statistics5" class="p-3 text-center">
+                    <div id="nft-statistics3" class="p-3 text-center">
                       <div class="spinner-border w-50px h-50px" role="status"> </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- ----------- Reporte Anual ---------------- -->
-              <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+              <!-- --------------- REPORTE ANUAL ----------------- -->
+              <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <div class="card custom-card">
-                  <!-- ------- titulo ------- -->
                   <div class="card-header justify-content-between flex-wrap">
-                    <div class="card-title"> Reporte Anual </div>
+                    <div class="card-title">Reporte Anual</div>  
                   </div>
-                  <!-- ----------- grafica -------- -->
-                  <div class="card-body p-0">
-                    <div id="nft-statistics6" class="p-3 text-center">
-                      <div class="spinner-border w-50px h-50px" role="status"> </div>
-                    </div>
+                  <div class="card-body py-0">
+                    <div class="p-3 text-center" id="crm-profits-earned2"></div>
                   </div>
                 </div>
               </div>

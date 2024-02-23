@@ -111,7 +111,7 @@ if (!isset($_SESSION["user_nombre"])) {
 
                         <!-- imagen -->
                         <div id="doc1_ver" class="text-center ">
-                          <img id="img_fondo" src="../assets/images/default/img_defecto2.png" alt="" width="78%" />
+                          <img id="img_fondo" src="../assets/images/default/img_defecto.png" alt="" width="78%" />
                         </div>
                         <div class="text-center" id="doc1_nombre" style="display: none;"><!-- aqui va el nombre del pdf --></div>
                       </div>
