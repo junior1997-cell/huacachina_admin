@@ -17,10 +17,10 @@ Class Empresa
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	public function actualizar_datos_empresa( $id,$direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono,$latitud,$longuitud,$correo,$horario, $rs_facebook,$rs_instagram,$rs_tiktok) {
+	public function actualizar_datos_empresa( $id,$direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono,$mapa,$longuitud,$correo,$horario, $rs_facebook,$rs_instagram,$rs_web) {
 		$sql="UPDATE nosotros SET direccion='$direccion', nombre_empresa='$nombre', tipo_documento = '$tipo_documento',	num_documento='$num_documento',	
-		celular='$celular',	telefono_fijo='$telefono', correo='$correo', horario='$horario',	latitud='$latitud',	longitud='$longuitud', user_updated ='$this->id_usr_sesion',
-		rs_facebook='$rs_facebook', rs_instagram='$rs_instagram', rs_tiktok='$rs_tiktok'
+		celular='$celular',	telefono_fijo='$telefono', correo='$correo', horario='$horario',	mapa='$mapa',	longitud='$longuitud', user_updated ='$this->id_usr_sesion',
+		rs_facebook='$rs_facebook', rs_instagram='$rs_instagram', rs_web='$rs_web'
 		WHERE idnosotros ='$id'";
 		return ejecutarConsulta($sql);
 

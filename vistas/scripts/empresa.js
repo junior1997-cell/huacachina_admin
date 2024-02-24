@@ -22,13 +22,13 @@ function activar_editar(estado) {
     $("#celular").removeAttr("readonly");
     $("#telefono").removeAttr("readonly");
     $("#correo").removeAttr("readonly");
-    $("#latitud").removeAttr("readonly");
+    $("#mapa").removeAttr("readonly");
     $("#longuitud").removeAttr("readonly");
     $("#horario").removeAttr("readonly");
 
     $("#rs_facebook").removeAttr("readonly");
     $("#rs_instagram").removeAttr("readonly");
-    $("#rs_tiktok").removeAttr("readonly");
+    $("#rs_web").removeAttr("readonly");
     toastr.success('Campos habiliados para editar!!!')
   }else if (estado=="2") {
 
@@ -42,13 +42,13 @@ function activar_editar(estado) {
     $("#celular").attr('readonly','true');
     $("#telefono").attr('readonly','true');
     $("#correo").attr('readonly','true');
-    $("#latitud").attr('readonly','true');
+    $("#mapa").attr('readonly','true');
     $("#longuitud").attr('readonly','true');
     $("#horario").attr('readonly','true');
 
     $("#rs_facebook").attr('readonly','true');
     $("#rs_instagram").attr('readonly','true');
-    $("#rs_tiktok").attr('readonly','true');
+    $("#rs_web").attr('readonly','true');
   }
 }
 
@@ -72,12 +72,12 @@ function mostrar() {
       $("#celular").val(e.data.celular);
       $("#telefono").val(e.data.telefono_fijo);
       $("#correo").val(e.data.correo);
-      $("#latitud").val(e.data.latitud);
+      $("#mapa").val(e.data.mapa);
       $("#longuitud").val(e.data.longitud);
       $("#horario").val(e.data.horario);
       $("#rs_facebook").val(e.data.rs_facebook);
       $("#rs_instagram").val(e.data.rs_instagram);
-      $("#rs_tiktok").val(e.data.rs_tiktok);
+      $("#rs_web").val(e.data.rs_web);
       
     }else{
       ver_errores(e);
@@ -171,20 +171,20 @@ $(function () {
       num_documento:{ required: true, minlength: 8, maxlength: 15, } , 
       celular:      { required: true, minlength: 4, maxlength: 9,} , 
       telefono:     { required: true, minlength: 4, maxlength: 9,} , 
-      latitud:      { required: true, minlength: 4, maxlength: 10,} , 
+      mapa:      { required: true} , 
       longuitud:    { required: true, minlength: 4, maxlength: 10,} , 
       correo:       { required: true, minlength: 4, maxlength: 100, } , 
       horario:      { required: true },
       rs_facebook:  { required: true, minlength: 4, maxlength: 150,}, 
       rs_instagram: { required: true, minlength: 4, maxlength: 150,}, 
-      rs_tiktok:    { required: true, minlength: 4, maxlength: 150,}, 
+      rs_web:    { required: true, minlength: 4, maxlength: 150,}, 
     },
     messages: {
 
       direccion: { required: "Por favor rellenar el campo", }, 
       celular: { required: "Por favor rellenar el campo", }, 
       telefono: { required: "Por favor rellenar el campo", }, 
-      latitud: { required: "Por favor rellenar el campo", }, 
+      mapa: { required: "Por favor rellenar el campo", }, 
       longuitud: { required: "Por favor rellenar el campo", }, 
       correo: { required: "Por favor rellenar el campo", }, 
       horario: { required: "Por favor rellenar el campo", }

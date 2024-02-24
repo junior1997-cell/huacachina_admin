@@ -120,16 +120,17 @@
                           </div>
                         </div>
                         
-                        <!-- Latitud -->
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                        <!-- mapa -->
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="margin-bottom: 20px;">
                           <div class="form-group">
-                            <label for="latitud">Latitud <sup class="text-danger">*</sup></label>
-                            <input type="text" name="latitud" class="form-control" id="latitud" readonly />
+                            <label for="mapa">Mapa Link <sup class="text-danger">*</sup></label>
+                            <textarea  class="form-control"  name="mapa" id="mapa" id="" cols="30" rows="1" readonly></textarea>
+                            
                           </div>
                         </div>
 
                         <!-- Longuitud -->
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px;">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 20px; display: none;">
                           <div class="form-group">
                             <label for="longuitud">Longuitud <sup class="text-danger">*</sup></label>
                             <input type="text" name="longuitud" class="form-control" id="longuitud" readonly />
@@ -161,12 +162,12 @@
                         <!-- TikTok -->
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4" style="margin-bottom: 20px;">
                           <div class="form-group">
-                            <label for="rs_tiktok">TikTok</label>
+                            <label for="rs_web">Página Web</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                  <i class="fa-brands fa-tiktok fa-lg"></i>
+                                  <i class="fa-brands las la-globe-americas fa-lg"></i>
                                 </span>
-                              <input type="url" name="rs_tiktok" class="form-control" id="rs_tiktok" placeholder="URL red social" readonly />
+                              <input type="url" name="rs_web" class="form-control" id="rs_web" placeholder="URL Pag. web" readonly />
                             </div>
                           </div>
                         </div>

@@ -25,13 +25,13 @@ if (!isset($_SESSION["user_nombre"])) {
     $num_documento  = isset($_POST["num_documento"])? limpiarCadena($_POST["num_documento"]):"";
     $celular        = isset($_POST["celular"])? limpiarCadena($_POST["celular"]):"";
     $telefono       = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]):"";
-    $latitud        = isset($_POST["latitud"])? limpiarCadena($_POST["latitud"]):"";
+    $mapa           = isset($_POST["mapa"])? limpiarCadena($_POST["mapa"]):"";
     $longuitud      = isset($_POST["longuitud"])? limpiarCadena($_POST["longuitud"]):"";
     $correo         = isset($_POST["correo"])? limpiarCadena($_POST["correo"]):"";
     $horario        = isset($_POST["horario"])? limpiarCadena($_POST["horario"]):"";
     $rs_facebook    = isset($_POST["rs_facebook"])? limpiarCadena($_POST["rs_facebook"]):"";
     $rs_instagram   = isset($_POST["rs_instagram"])? limpiarCadena($_POST["rs_instagram"]):"";
-    $rs_tiktok      = isset($_POST["rs_tiktok"])? limpiarCadena($_POST["rs_tiktok"]):"";
+    $rs_web      = isset($_POST["rs_web"])? limpiarCadena($_POST["rs_web"]):"";
 
     switch ($_GET["op"]) {   
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION["user_nombre"])) {
           json_encode( $rspta, true) ;
         }else {
           // editamos un documento existente
-          $rspta=$empresa->actualizar_datos_empresa( $id,$direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono,$latitud,$longuitud,$correo,$horario, $rs_facebook,$rs_instagram,$rs_tiktok );          
+          $rspta=$empresa->actualizar_datos_empresa( $id,$direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono,$mapa,$longuitud,$correo,$horario, $rs_facebook,$rs_instagram,$rs_web );          
           echo json_encode( $rspta, true) ;
         }
       break;
