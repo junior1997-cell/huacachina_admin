@@ -52,24 +52,37 @@ if (!isset($_SESSION["user_nombre"])) {
           $ext1 = explode(".", $_FILES["doc1"]["name"]);
           $flat_img1 = true;
           $imagen = $date_now . '__' . random_int(0, 20) . round(microtime(true)) . random_int(21, 41) . '.' . end($ext1);
-          move_uploaded_file($_FILES["doc1"]["tmp_name"], "../assets/images/landing_disenio/" . $imagen);
+          move_uploaded_file($_FILES["doc1"]["tmp_name"], "../assets/modulo/landing_disenio/" . $imagen);
 
           //guardar imagen bono
           $ext2 = explode(".", $_FILES["doc2"]["name"]);
           $flat_img2 = true;
           $imag2 = $date_now . '__' . random_int(0, 20) . round(microtime(true)) . random_int(21, 41) . '.' . end($ext2);
-          move_uploaded_file($_FILES["doc2"]["tmp_name"], "../assets/images/landing_disenio/" . $imag2);
+          move_uploaded_file($_FILES["doc2"]["tmp_name"], "../assets/modulo/landing_disenio/" . $imag2);
         }
 
-        if ($flat_img1 == true && $flat_img2 == true) {
+        if ($flat_img1 == true || empty($imagen)) {
           $datos_f1 = $landing_disenio->obtenerImg($idlanding_disenio);
           $img1_ant = $datos_f1['data']['img_fondo'];
-          if (!empty($img1_ant)) { unlink("../assets/images/landing_disenio/" . $img1_ant); }
+          if (!empty($img1_ant)) { unlink("../assets/modulo/landing_disenio/" . $img1_ant); }
 
           $datos_f2 = $landing_disenio->obtenerImg($idlanding_disenio);
           $img2_ant = $datos_f2['data']['img_promocion'];
-          if (!empty($img2_ant)) { unlink("../assets/images/landing_disenio/" . $img2_ant); }
+          if (!empty($img2_ant)) { unlink("../assets/modulo/landing_disenio/" . $img2_ant); }
         }
+
+        if ( $flat_img2 == true || empty($imag2)) {
+
+          $datos_f1 = $landing_disenio->obtenerImg($idlanding_disenio);
+          $img1_ant = $datos_f1['data']['img_fondo'];
+          if (!empty($img1_ant)) { unlink("../assets/modulo/landing_disenio/" . $img1_ant); }
+
+          $datos_f2 = $landing_disenio->obtenerImg($idlanding_disenio);
+          $img2_ant = $datos_f2['data']['img_promocion'];
+          if (!empty($img2_ant)) { unlink("../assets/modulo/landing_disenio/" . $img2_ant); }
+        }
+
+
 
         $rspta = $landing_disenio->editar($idlanding_disenio,$titulo,$descripcion,$imagen,$imag2);
         echo json_encode($rspta, true);
@@ -90,13 +103,13 @@ if (!isset($_SESSION["user_nombre"])) {
           $ext1 = explode(".", $_FILES["doc1"]["name"]);
           $flat_img1 = true;
           $imagen = $date_now . '__' . random_int(0, 20) . round(microtime(true)) . random_int(21, 41) . '.' . end($ext1);
-          move_uploaded_file($_FILES["doc1"]["tmp_name"], "../assets/images/landing_disenio/" . $imagen);
+          move_uploaded_file($_FILES["doc1"]["tmp_name"], "../assets/modulo/landing_disenio/" . $imagen);
 
           //guardar imagen bono
           $ext2 = explode(".", $_FILES["doc2"]["name"]);
           $flat_img2 = true;
           $imag2 = $date_now . '__' . random_int(0, 20) . round(microtime(true)) . random_int(21, 41) . '.' . end($ext2);
-          move_uploaded_file($_FILES["doc2"]["tmp_name"], "../assets/images/landing_disenio/" . $imag2);
+          move_uploaded_file($_FILES["doc2"]["tmp_name"], "../assets/modulo/landing_disenio/" . $imag2);
         }
 
         $rspta = $landing_disenio->insertar($titulo,$descripcion,$imagen,$imag2);

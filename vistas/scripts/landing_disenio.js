@@ -42,7 +42,7 @@ function mostrar() {
         $("#doc_old_1").val(e.data.img_fondo); 
         $("#doc1_nombre").html(`<div class="row"> <div class="col-md-12"><i>imagen.${extrae_extencion(e.data.img_fondo)}</i></div></div>`);
         // cargamos la imagen adecuada par el archivo
-        $("#doc1_ver").html(doc_view_extencion(e.data.img_fondo,'assets/images/landing_disenio', '100%', '210' ));   //ruta imagen          
+        $("#doc1_ver").html(doc_view_extencion(e.data.img_fondo,'assets/modulo/landing_disenio', '100%', '210' ));   //ruta imagen          
       }
 
 
@@ -51,7 +51,7 @@ function mostrar() {
         $("#doc_old_2").val(e.data.img_promocion); 
         $("#doc2_nombre").html(`<div class="row"> <div class="col-md-12"><i>imagen.${extrae_extencion(e.data.img_promocion)}</i></div></div>`);
         // cargamos la imagen adecuada par el archivo
-        $("#doc2_ver").html(doc_view_extencion(e.data.img_promocion,'assets/images/landing_disenio', '100%', '210' ));   //ruta imagen          
+        $("#doc2_ver").html(doc_view_extencion(e.data.img_promocion,'assets/modulo/landing_disenio', '100%', '210' ));   //ruta imagen          
       }
 
     }else{
