@@ -112,10 +112,15 @@
                 <div class="text-fixed-white text-center p-5 d-flex align-items-center justify-content-center">
                   <div>
                     <div class="mb-5">
-                      <img src="../assets/images/authentication/2.png" class="authentication-image" alt="">
+                      <img src="../assets/modulo/login/img_portal_login_1.png" class="authentication-image" alt="">
                     </div>
-                    <h6 class="fw-semibold text-fixed-white">Sign In</h6>
-                    <p class="fw-normal fs-14 op-7"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>
+                    <h6 class="fw-semibold text-fixed-white">¿Listo para continuar?</h6>
+                    <p class="fw-normal fs-14 op-7">
+                    ¡Saludos! Nos alegra verte de nuevo por aquí. Para continuar donde lo dejaste y acceder a todas 
+                    las increíbles funciones que ofrecemos, por favor, ingresa tu usuario y contraseña a continuación. 
+                    ¡Gracias por elegirnos!
+
+                    </p>
                   </div>
                 </div>
               </div>
@@ -123,10 +128,11 @@
                 <div class="text-fixed-white text-center p-5 d-flex align-items-center justify-content-center">
                   <div>
                     <div class="mb-5">
-                      <img src="../assets/images/authentication/3.png" class="authentication-image" alt="">
+                      <img src="../assets/modulo/login/img_portal_login_2.png" class="authentication-image" alt="">
                     </div>
-                    <h6 class="fw-semibold text-fixed-white">Sign In</h6>
-                    <p class="fw-normal fs-14 op-7"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>
+                    <h6 class="fw-semibold text-fixed-white">¡Estamos emocionados de verte de nuevo!</h6>
+                    <p class="fw-normal fs-14 op-7"> Esperamos que tu última visita haya sido memorable. Para continuar explorando y descubriendo todo lo que tenemos para ofrecer, por favor, inicia sesión.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -134,10 +140,11 @@
                 <div class="text-fixed-white text-center p-5 d-flex align-items-center justify-content-center">
                   <div>
                     <div class="mb-5">
-                      <img src="../assets/images/authentication/2.png" class="authentication-image" alt="">
+                      <img src="../assets/modulo/login/img_portal_login_3.png" class="authentication-image" alt="">
                     </div>
-                    <h6 class="fw-semibold text-fixed-white">Sign In</h6>
-                    <p class="fw-normal fs-14 op-7"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>
+                    <h6 class="fw-semibold text-fixed-white">¡Estamos listos para continuar juntos!</h6>
+                    <p class="fw-normal fs-14 op-7">Por favor, proporciona tus credenciales de inicio de sesión para acceder a tu cuenta y continuar tu viaje con nosotros.
+                    </p>
                   </div>
                 </div>
               </div>
