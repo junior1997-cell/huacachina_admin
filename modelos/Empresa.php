@@ -17,10 +17,12 @@ Class Empresa
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	public function actualizar_datos_empresa( $id,$direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono,$mapa,$longuitud,$correo,$horario, $rs_facebook,$rs_instagram,$rs_web) {
+	public function actualizar_datos_empresa( $id, $direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono, $link_grupo_whats,$mapa,$correo,$horario, 
+	$rs_facebook,$rs_instagram,$rs_web, $rs_facebook_etiqueta, $rs_instagram_etiqueta, $rs_web_etiqueta) {
 		$sql="UPDATE nosotros SET direccion='$direccion', nombre_empresa='$nombre', tipo_documento = '$tipo_documento',	num_documento='$num_documento',	
-		celular='$celular',	telefono_fijo='$telefono', correo='$correo', horario='$horario',	mapa='$mapa',	longitud='$longuitud', user_updated ='$this->id_usr_sesion',
-		rs_facebook='$rs_facebook', rs_instagram='$rs_instagram', rs_web='$rs_web'
+		celular='$celular',	telefono_fijo='$telefono', link_grupo_whats = '$link_grupo_whats', correo='$correo', horario='$horario',	mapa='$mapa',	 user_updated ='$this->id_usr_sesion',
+		rs_facebook='$rs_facebook', rs_instagram='$rs_instagram', rs_web='$rs_web', rs_facebook_etiqueta = '$rs_facebook_etiqueta', rs_instagram_etiqueta = '$rs_instagram_etiqueta',
+		rs_web_etiqueta = '$rs_web_etiqueta'
 		WHERE idnosotros ='$id'";
 		return ejecutarConsulta($sql);
 

@@ -15,7 +15,7 @@ Class Correo_wordpress
 	//Implementar un método para listar los registros
 	public function tbla_principal( $id )	{
 		$sql="SELECT form_id, form_post_id, form_value, form_date, DATE_FORMAT(form_date, '%d/%m/%Y %h:%i %p') as fecha_12h 
-    FROM wpb4_wpforms_db WHERE form_post_id = '$id' ORDER BY form_date ASC";
+    FROM wpb4_wpforms_db WHERE form_post_id = '$id' ORDER BY form_date DESC";
 		return ejecutarConsultaArray_W($sql);		
 	}	
 	

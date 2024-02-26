@@ -3,7 +3,7 @@ function init() {
 
   mostrar();
 	// ══════════════════════════════════════ G U A R D A R   F O R M ══════════════════════════════════════
-  $("#actualizar_registro").on("click", function (e) { $("#submit-form-actualizar-registro").submit(); });
+  $("#guardar_registro_empresa").on("click", function (e) { if ($(this).hasClass('send-data') == false) { $("#submit-form-empresa").submit(); } });
 
   // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T 2 ══════════════════════════════════════
  
@@ -15,40 +15,15 @@ function activar_editar(estado) {
     $(".editar").hide();
     $(".actualizar").show();
 
-    $("#nombre").removeAttr("readonly");
-    $("#direccion").removeAttr("readonly");
-    $("#tipo_documento").removeAttr("readonly");
-    $("#num_documento").removeAttr("readonly");
-    $("#celular").removeAttr("readonly");
-    $("#telefono").removeAttr("readonly");
-    $("#correo").removeAttr("readonly");
-    $("#mapa").removeAttr("readonly");
-    $("#longuitud").removeAttr("readonly");
-    $("#horario").removeAttr("readonly");
+    $(".inpur_edit").removeAttr("readonly");
 
-    $("#rs_facebook").removeAttr("readonly");
-    $("#rs_instagram").removeAttr("readonly");
-    $("#rs_web").removeAttr("readonly");
     toastr.success('Campos habiliados para editar!!!')
   }else if (estado=="2") {
 
     $(".editar").show();
     $(".actualizar").hide();
 
-    $("#nombre").attr('readonly','true');
-    $("#direccion").attr('readonly','true');
-    $("#tipo_documento").attr('readonly','true');
-    $("#num_documento").attr('readonly','true');
-    $("#celular").attr('readonly','true');
-    $("#telefono").attr('readonly','true');
-    $("#correo").attr('readonly','true');
-    $("#mapa").attr('readonly','true');
-    $("#longuitud").attr('readonly','true');
-    $("#horario").attr('readonly','true');
-
-    $("#rs_facebook").attr('readonly','true');
-    $("#rs_instagram").attr('readonly','true');
-    $("#rs_web").attr('readonly','true');
+    $(".inpur_edit").attr('readonly','true');
   }
 }
 
@@ -68,16 +43,22 @@ function mostrar() {
       $("#idnosotros").val(e.data.idnosotros);
       $("#nombre").val(e.data.nombre_empresa);
       $("#direccion").val(e.data.direccion);
-      $("#num_documento").val(e.data.num_documento);
+      $("#num_documento").val(e.data.num_documento);      
+      $("#mapa").val(e.data.mapa);      
+      $("#horario").val(e.data.horario);
+
+      $("#correo").val(e.data.correo);
       $("#celular").val(e.data.celular);
       $("#telefono").val(e.data.telefono_fijo);
-      $("#correo").val(e.data.correo);
-      $("#mapa").val(e.data.mapa);
-      $("#longuitud").val(e.data.longitud);
-      $("#horario").val(e.data.horario);
+      $("#link_grupo_whats").val(e.data.link_grupo_whats);      
+
       $("#rs_facebook").val(e.data.rs_facebook);
       $("#rs_instagram").val(e.data.rs_instagram);
       $("#rs_web").val(e.data.rs_web);
+
+      $("#rs_facebook_etiqueta").val(e.data.rs_facebook_etiqueta);
+      $("#rs_instagram_etiqueta").val(e.data.rs_instagram_etiqueta);
+      $("#rs_web_etiqueta").val(e.data.rs_web_etiqueta);
       
     }else{
       ver_errores(e);
@@ -133,9 +114,7 @@ function actualizar_datos_generales(e) {
 
             $("#barra_progress2").text(percentComplete.toFixed(2) + " %");
 
-            if (percentComplete === 100) {
-              l_m();
-            }
+            
           }
         },
         false
@@ -145,15 +124,11 @@ function actualizar_datos_generales(e) {
   });
 }
 
-function l_m() {
-  // limpiar();
-  $("#barra_progress").css({ width: "0%" });
-
-  $("#barra_progress").text("0%");
-
-  $("#barra_progress2").css({ width: "0%" });
-
-  $("#barra_progress2").text("0%");
+function view_mapa() {
+  
+  $(".preview-mapa").html($("#mapa").val());
+  $('.preview-mapa iframe').attr('width', '100%').attr('height', '400px');
+  $("#modal-agregar-mapa").modal("show");
 }
 
 init();
@@ -168,26 +143,32 @@ $(function () {
     rules: {
       nombre:       { required: true, minlength: 4, maxlength: 100, } , 
       direccion:    { required: true, minlength: 4, maxlength: 100, } , 
-      num_documento:{ required: true, minlength: 8, maxlength: 15, } , 
-      celular:      { required: true, minlength: 4, maxlength: 9,} , 
-      telefono:     { required: true, minlength: 4, maxlength: 9,} , 
-      mapa:      { required: true} , 
-      longuitud:    { required: true, minlength: 4, maxlength: 10,} , 
-      correo:       { required: true, minlength: 4, maxlength: 100, } , 
-      horario:      { required: true },
-      rs_facebook:  { required: true, minlength: 4, maxlength: 150,}, 
-      rs_instagram: { required: true, minlength: 4, maxlength: 150,}, 
-      rs_web:    { required: true, minlength: 4, maxlength: 150,}, 
+      num_documento:{ required: true, minlength: 8, maxlength: 15, } ,       
+      mapa:         { required: true} , 
+      horario:      { required: true, minlength: 4, maxlength: 200,},
+      
+      correo:           { required: true, minlength: 4, maxlength: 100, } , 
+      celular:          { required: true, minlength: 4, maxlength: 9,} , 
+      telefono:         { minlength: 4, maxlength: 9,} , 
+      link_grupo_whats: { required: true, minlength: 4, maxlength: 150,} , 
+      
+
+      rs_facebook:          { required: true, minlength: 4, maxlength: 150,}, 
+      rs_instagram:         { required: true, minlength: 4, maxlength: 150,}, 
+      rs_web:               { required: true, minlength: 4, maxlength: 150,}, 
+      rs_facebook_etiqueta: { required: true, minlength: 4, maxlength: 150,}, 
+      rs_instagram_etiqueta:{ required: true, minlength: 4, maxlength: 150,}, 
+      rs_web_etiqueta:      { required: true, minlength: 4, maxlength: 150,}, 
     },
     messages: {
 
-      direccion: { required: "Por favor rellenar el campo", }, 
-      celular: { required: "Por favor rellenar el campo", }, 
-      telefono: { required: "Por favor rellenar el campo", }, 
-      mapa: { required: "Por favor rellenar el campo", }, 
-      longuitud: { required: "Por favor rellenar el campo", }, 
-      correo: { required: "Por favor rellenar el campo", }, 
-      horario: { required: "Por favor rellenar el campo", }
+      direccion:  { required: "Campo requerido.", }, 
+      celular:    { required: "Campo requerido.", }, 
+      telefono:   { required: "Campo requerido.", }, 
+      mapa:       { required: "Campo requerido.", }, 
+      longuitud:  { required: "Campo requerido.", }, 
+      correo:     { required: "Campo requerido.", }, 
+      horario:    { required: "Campo requerido.", }
     },
     
     errorElement: "span",

@@ -644,14 +644,14 @@ function addImageApplication(e, id, img_default='', width='100%', height='310', 
           
           if (detalle_upload == true) {
             $(`#${id}_nombre`).html(`<div class="row">
-              <div class="col-sm-11 col-md-10 col-lg-11 col-xl-11 mt-2">
-                <p><b>Nombre:</b><i> ${file.name}</i></p>
-                <p><b>Tamaño:</b> ${formato_miles(sizemegaBytes)} mb</p>
-                <p><b>Tipo:</b> ${file.type}</p>
+              <div class="col-sm-1 col-md-2 col-lg-2 col-xl-2 mt-2 text-center">
+                <button class="btn btn-danger  btn-xs h-100" onclick="${id}_eliminar();" type="button" data-bs-toggle="tooltip" title="Eliminar" ><i class='bx bx-trash' ></i></button>
               </div>
-              <div class="col-sm-1 col-md-2 col-lg-1 col-xl-1 mt-2">
-                <button class="btn btn-danger btn-block btn-xs h-100" onclick="${id}_eliminar();" type="button" ><i class="far fa-trash-alt"></i></button>
-              </div>
+              <div class="col-sm-11 col-md-10 col-lg-10 col-xl-10 mt-2 text-left">
+                <p class="my-0"><b>Nombre:</b><ins><i> ${file.name}</i></ins></p>
+                <p class="my-0"><b>Tamaño:</b> ${formato_miles(sizemegaBytes)} mb</p>
+                <p class="my-0"><b>Tipo:</b> ${file.type}</p>
+              </div>              
             </div>`);
           } else {
             $(`#${id}_nombre`).html(`<div class="row">
@@ -659,17 +659,14 @@ function addImageApplication(e, id, img_default='', width='100%', height='310', 
                 <i> ${file.name} </i>
               </div>
               <div class="col-md-12">
-                <button class="btn btn-danger btn-block btn-xs" onclick="${id}_eliminar();" type="button" ><i class="far fa-trash-alt"></i></button>
+                <button class="btn btn-danger btn-block btn-xs" onclick="${id}_eliminar();" type="button" data-bs-toggle="tooltip" title="Eliminar" ><i class='bx bx-trash' ></i></button>
               </div>
             </div>`);
-          }					
+          }			
+          $('[data-bs-toggle="tooltip"]').tooltip();		
 
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: `El documento: ${file.name.toUpperCase()} es aceptado.`,
-            showConfirmButton: false,
-            timer: 1500
+            position: 'top-end',  icon: 'success',  title: `El documento: ${file.name.toUpperCase()} es aceptado.`, showConfirmButton: false, timer: 1500
           });
 				}
 
@@ -677,11 +674,7 @@ function addImageApplication(e, id, img_default='', width='100%', height='310', 
 
 			} else {
         Swal.fire({
-          position: 'top-end',
-          icon: 'warning',
-          title: `El documento: ${file.name.toUpperCase()} es muy pesado.`,
-          showConfirmButton: false,
-          timer: 1500
+          position: 'top-end',  icon: 'warning',  title: `El documento: ${file.name.toUpperCase()} es muy pesado.`, showConfirmButton: false,  timer: 1500
         })
 
         if (img_default == '' || img_default == null || img_default == false || img_default == true ) {
@@ -696,11 +689,7 @@ function addImageApplication(e, id, img_default='', width='100%', height='310', 
 		}
 	}else{
     Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      title: 'Seleccione un documento',
-      showConfirmButton: false,
-      timer: 1500
+      position: 'top-end',  icon: 'error', title: 'Seleccione un documento',  showConfirmButton: false,  timer: 1500
     });
 
     if (img_default == '' || img_default == null || img_default == false || img_default == true ) {
@@ -712,6 +701,7 @@ function addImageApplication(e, id, img_default='', width='100%', height='310', 
 		$("#"+id+"_nombre").html("");
     $("#"+id).val("");
 	}	
+  
 }
 
 // recargar un doc para ver

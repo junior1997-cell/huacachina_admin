@@ -18,17 +18,20 @@ class Landing_disenio
 	}
 
   public function obtenerImg($idlanding_disenio){
-    $sql="SELECT img_fondo, img_promocion FROM landing_disenio WHERE idlanding_disenio = '$idlanding_disenio'; ";
+    $sql="SELECT * FROM landing_disenio WHERE idlanding_disenio = '$idlanding_disenio'; ";
     return ejecutarConsultaSimpleFila($sql);  
   }
 
-  public function editar($id, $titulo, $descripcion, $imagen, $imag2){
-    $sql = "UPDATE landing_disenio SET titulo = '$titulo', descripcion = '$descripcion', img_fondo = '$imagen', img_promocion = '$imag2' WHERE idlanding_disenio = '$id'";
+  public function editar($id, $f_titulo,$f_descripcion,$fe_titulo,$fe_descripcion,$f_img_fondo,$f_img_promocion, $fe_img_fondo){
+    $sql = "UPDATE landing_disenio SET f_img_fondo = '$f_img_fondo', f_img_promocion = '$f_img_promocion', f_titulo = '$f_titulo', f_descripcion = '$f_descripcion', 
+    fe_img_fondo = '$fe_img_fondo', fe_titulo = '$fe_titulo', fe_descripcion = '$fe_descripcion'
+    WHERE idlanding_disenio = '$id'";
     return ejecutarConsulta($sql);
   }
 
-  public function insertar($titulo, $descripcion, $imagen, $imag2){
-    $sql = "INSERT INTO landing_disenio (titulo, descripcion, img_fondo, img_promocion) VALUES ('$titulo', '$descripcion', '$imagen', '$imag2')";
+  public function insertar($f_titulo,$f_descripcion,$fe_titulo,$fe_descripcion,$f_img_fondo,$f_img_promocion, $fe_img_fondo){
+    $sql = "INSERT INTO landing_disenio (f_img_fondo, f_img_promocion, f_titulo, f_descripcion, fe_img_fondo, fe_titulo, fe_descripcion) 
+    VALUES ('$f_img_fondo', '$f_img_promocion', '$f_titulo', '$f_descripcion', '$fe_img_fondo', '$fe_titulo', '$fe_descripcion' )";
     return ejecutarConsulta_retornarID($sql);
   }
 }

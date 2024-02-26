@@ -23,15 +23,20 @@ if (!isset($_SESSION["user_nombre"])) {
     $nombre         = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
     $tipo_documento = isset($_POST["tipo_documento"])? limpiarCadena($_POST["tipo_documento"]):"";
     $num_documento  = isset($_POST["num_documento"])? limpiarCadena($_POST["num_documento"]):"";
-    $celular        = isset($_POST["celular"])? limpiarCadena($_POST["celular"]):"";
-    $telefono       = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]):"";
-    $mapa           = isset($_POST["mapa"])? limpiarCadena($_POST["mapa"]):"";
-    $longuitud      = isset($_POST["longuitud"])? limpiarCadena($_POST["longuitud"]):"";
-    $correo         = isset($_POST["correo"])? limpiarCadena($_POST["correo"]):"";
+    $mapa           = isset($_POST["mapa"])? limpiarCadena($_POST["mapa"]):"";    
     $horario        = isset($_POST["horario"])? limpiarCadena($_POST["horario"]):"";
-    $rs_facebook    = isset($_POST["rs_facebook"])? limpiarCadena($_POST["rs_facebook"]):"";
-    $rs_instagram   = isset($_POST["rs_instagram"])? limpiarCadena($_POST["rs_instagram"]):"";
-    $rs_web      = isset($_POST["rs_web"])? limpiarCadena($_POST["rs_web"]):"";
+
+    $correo           = isset($_POST["correo"])? limpiarCadena($_POST["correo"]):"";
+    $celular          = isset($_POST["celular"])? limpiarCadena($_POST["celular"]):"";
+    $telefono         = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]):"";
+    $link_grupo_whats = isset($_POST["link_grupo_whats"])? limpiarCadena($_POST["link_grupo_whats"]):"";  
+
+    $rs_facebook            = isset($_POST["rs_facebook"])? limpiarCadena($_POST["rs_facebook"]):"";
+    $rs_instagram           = isset($_POST["rs_instagram"])? limpiarCadena($_POST["rs_instagram"]):"";
+    $rs_web                 = isset($_POST["rs_web"])? limpiarCadena($_POST["rs_web"]):"";
+    $rs_facebook_etiqueta   = isset($_POST["rs_facebook_etiqueta"])? limpiarCadena($_POST["rs_facebook_etiqueta"]):"";
+    $rs_instagram_etiqueta  = isset($_POST["rs_instagram_etiqueta"])? limpiarCadena($_POST["rs_instagram_etiqueta"]):"";
+    $rs_web_etiqueta        = isset($_POST["rs_web_etiqueta"])? limpiarCadena($_POST["rs_web_etiqueta"]):"";
 
     switch ($_GET["op"]) {   
 
@@ -49,7 +54,8 @@ if (!isset($_SESSION["user_nombre"])) {
           json_encode( $rspta, true) ;
         }else {
           // editamos un documento existente
-          $rspta=$empresa->actualizar_datos_empresa( $id,$direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono,$mapa,$longuitud,$correo,$horario, $rs_facebook,$rs_instagram,$rs_web );          
+          $rspta=$empresa->actualizar_datos_empresa( $id, $direccion,$nombre,$tipo_documento, $num_documento,$celular,$telefono, $link_grupo_whats,$mapa,$correo,$horario, 
+          $rs_facebook,$rs_instagram,$rs_web, $rs_facebook_etiqueta, $rs_instagram_etiqueta, $rs_web_etiqueta);          
           echo json_encode( $rspta, true) ;
         }
       break;
