@@ -17,6 +17,11 @@ if (!isset($_SESSION["user_nombre"])) {
     <link rel="stylesheet" href="../assets/libs/jsvectormap/css/jsvectormap.min.css">
     <link rel="stylesheet" href="../assets/libs/swiper/swiper-bundle.min.css">
 
+    <style>
+      .scale-up-horizontal-left{animation:scale-up-horizontal-left 0.5s } @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
+      .scale-up-vertical-top1{animation:scale-up-vertical-top 0.4s linear} @keyframes scale-up-vertical-top{0%{transform:scaleY(.4);transform-origin:center top}100%{transform:scaleY(1);transform-origin:center top}}
+      .scale-up-vertical-top2{animation:scale-up-vertical-bottom 0.4s linear} @keyframes scale-up-vertical-bottom{0%{transform:scaleY(.4);transform-origin:center bottom}100%{transform:scaleY(1);transform-origin:center bottom}}
+    </style>
   </head>
 
   <!-- <body idusuario="<?php //echo $_SESSION["idempresa"]; ?>" reporte="<?php //echo $_SESSION["reporte"]; ?>" > -->
@@ -42,17 +47,32 @@ if (!isset($_SESSION["user_nombre"])) {
           <section id="correo-1">
             <div class="row">
               <!-- ------------ Emcabezado ------------------- -->
-              <div class="my-4">
-               
-                    <p class="fw-semibold fs-18 mb-0">Reportes del correo Landing Page</p>
-                    <span class="fs-semibold text-muted">semana - mes - año</span>
-              
-              </div>
-
+                <div class="my-4">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="fw-semibold fs-18 mb-0">Reportes del correo Landing Page</p>
+                      <span class="fs-semibold text-muted">semana - mes - año</span>
+                    </div>
+                    <div class="col-md-6 text-end">
+                      <div class="d-inline-block me-2">
+                        <select name="anios" id="anios" class="form-select"> <!-- lista de años --> </select>
+                      </div>
+                      <div class="d-inline-block me-2">
+                        <select name="meses" id="meses" class="form-select"> <!-- lista de meses --> </select>
+                      </div>
+                      <div class="d-inline-block">
+                        <button type="button" class="btn btn-primary btn-wave" id="filtroBtn">
+                          <i class="ri-filter-3-fill me-2 align-middle d-inline-block"></i>Filtrar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
 
               <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <!-- ----------- REPORTE SEMANAL ---------------- -->
-                <div class="row">
+                <div class="row scale-up-vertical-top1">
                   <div class="card custom-card crm-highlight-card">
                     <!-- ------- titulo ------- -->
                     <div class="card-header justify-content-left flex-wrap">
@@ -61,11 +81,11 @@ if (!isset($_SESSION["user_nombre"])) {
                       </span>
                       <div>
                         <div class="flex-fill fw-semibold fs-18 text-fixed-white"> Reporte Semanal</div>
-                        <a href="#" class=" fs-12" id="mes_seleccionado">Todos</a>
+                        <a href="#" class=" fs-12" id="mes_seleccionado"></a>
                       </div>
                     </div>
                     <!-- ----------- grafica -------- -->
-                    <div class="card-body p-2">
+                    <div class="card-body">
                       <div class="row">
                         <div class="d-flex flex-wrap justify-content-evenly flex-fill">
                           <div class="m-sm-0 m-2">
@@ -82,7 +102,7 @@ if (!isset($_SESSION["user_nombre"])) {
                           </div>
                         </div>
                       </div>
-                      <div class="row m-sm-3">
+                      <div class="row m-sm-2">
                         <div class="d-flex flex-wrap justify-content-evenly flex-fill">
                           <div class="m-sm-0 m-2">
                             <span><b>Jueves</b></span> <div class="fw-semibold mb-0 text-danger dia-semana-4"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
@@ -100,8 +120,8 @@ if (!isset($_SESSION["user_nombre"])) {
                 </div>
 
                 <!-- ----------- REPORTE 24 HORAS --------------- -->
-                <div class="row">
-                  <div class="card custom-card overflow-hidden">
+                <div class="row scale-up-vertical-top2">
+                  <div class="card custom-card overflow-hidden" >
                     <div class="card-body">
                       <div class="d-flex align-items-top justify-content-between">
                         <div>
@@ -109,23 +129,13 @@ if (!isset($_SESSION["user_nombre"])) {
                             <i class="ti ti-users fs-16"></i>
                           </span>
                         </div>
-                        <div class="flex-fill ms-3">
-                          <div class="d-flex align-items-center justify-content-between flex-wrap">
-                            <div>
-                              <p class="text-muted mb-0">Últimas 24 Horas</p>
-                              <h4 class="fw-semibold mt-1" id="recientes"> <!-- Datos 24H --> </h4>
-                            </div>
-                            <div id="crm-total-customers"></div>
-                          </div>
-                          <div class="d-flex align-items-center justify-content-between mt-1">
-                            <div>
-                              <!-- <a class="text-primary" href="javascript:void(0);">View All<i class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a> -->
-                            </div>
-                            <div class="text-end">
-                              <p class="mb-0 text-success fw-semibold" id="porsentaje"></p>
-                              <span class="text-muted op-7 fs-11">este mes</span>
-                            </div>
-                          </div>
+                        <div class="flex-fill ms-3" >
+                          <p class="text-muted mb-0">Últimas 24 Horas</p>
+                          <h4 class="fw-semibold mt-1" id="recientes"> <!-- Datos 24H --> </h4>
+                        </div>    
+                        <div class="col-4 text-end" >
+                          <div class="mb-0" id="porsentaje" style="color: black;"></div>
+                          <span class="mt-0">este mes</span>
                         </div>
                       </div>
                     </div>
@@ -134,16 +144,16 @@ if (!isset($_SESSION["user_nombre"])) {
               </div>
 
               <!-- ------------- REPORTE MENSUAL ---------------- -->
-              <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+              <div class="col-xxl-9 col-xl-5 col-lg-6 col-md-12 col-sm-12 scale-up-horizontal-left">
                 <div class="card custom-card">
                   <!-- ------- titulo ------- -->
                   <div class="card-header justify-content-between flex-wrap">
                     <div class="card-title"> Reporte Mensual </div>
-                    <a href="#" class="p-2 fs-12 text-muted" id="anio_seleccionado">Todos</a>
+                    <a href="#" class="p-2 fs-12 text-muted" id="mesSeleccionado"></a>
                   </div>
                   <!-- ----------- grafica -------- -->
                   <div class="card-body p-0">
-                    <div id="nft-statistics2" class="p-3 text-center">
+                    <div id="graf_linea_mes_landing" class="p-3 text-center">
                       <div class="spinner-border w-50px h-50px" role="status"> </div>
                     </div>
                   </div>
@@ -151,21 +161,14 @@ if (!isset($_SESSION["user_nombre"])) {
               </div>
 
               <!-- ------------- REPORTE ANUAL ------------------ -->
-              <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+              <div class="col-xxl-12 col-xl-5 col-lg-6 col-md-12 col-sm-12 scale-up-horizontal-left">
                 <div class="card custom-card">
                   <div class="card-header justify-content-between flex-wrap">
                     <div class="card-title">Reporte Anual</div> 
-                    <div class="dropdown">
-                      <a href="javascript:void(0);" class="p-2 fs-12 text-muted" data-bs-toggle="dropdown" aria-expanded="false">
-                          Más reciente<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
-                      </a>
-                      <ul class="dropdown-menu" role="menu" id="grupos_anios">
-                        <!-- listar los grupos de 5 en 5 mostrando "primero - ultimo" -->
-                      </ul>
-                    </div> 
+                    <a class="p-2 fs-12 text-muted" id="anioSeleccionado"></a>
                   </div>
                   <div class="card-body py-0">
-                    <div class="p-3 text-center" id="crm-profits-earned"></div>
+                    <div class="p-3 text-center" id="graf_barra_anio_landing"></div>
                   </div>
                 </div>
               </div>
@@ -179,50 +182,70 @@ if (!isset($_SESSION["user_nombre"])) {
           <section id="correo-2">
             <div class="row">
               <!-- --------------- Emcabezado ------------------- -->
-              <div class=" my-4">
-                <p class="fw-semibold fs-18 mb-0">Reportes de Correo WordPress</p>
-                <span class="fs-semibold text-muted">semana - mes - año</span>
+              <div class="my-4">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="fw-semibold fs-18 mb-0">Reportes de Correo WordPress</p>
+                    <span class="fs-semibold text-muted">semana - mes - año</span>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <div class="d-inline-block me-2">
+                      <select name="anios2" id="anios2" class="form-select"> <!-- lista de años --> </select>
+                    </div>
+                    <div class="d-inline-block me-2">
+                      <select name="meses2" id="meses2" class="form-select"> <!-- lista de meses --> </select>
+                    </div>
+                    <div class="d-inline-block">
+                      <button type="button" class="btn btn-purple btn-wave" id="filtroBtn2">
+                        <i class="ri-filter-3-fill me-2 align-middle d-inline-block"></i>Filtrar
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12 col-sm-12">
                 <!-- ------------ REPORTE SEMANAL --------------- -->
-                <div class="row">
-                  <div class="card custom-card " style="background-color: #6f42c1;">
+                <div class="row scale-up-vertical-top1">
+                  <div class="card custom-card" style="background-color: #6f42c1;">
                     <!-- ------- titulo ------- -->
-                    <div class="card-header justify-content-between flex-wrap">
+                    <div class="card-header justify-content-left flex-wrap">
                       <span class="avatar avatar-md avatar-rounded" style="background-color: #AB5FE3;">
                         <i class="ti ti-calendar fs-20"></i>
                       </span>
-                      <div class="flex-fill fw-semibold fs-18 text-fixed-white mb-2"> Reporte Semanal </div>
+                      <div>
+                        <div class="flex-fill fw-semibold fs-18 text-fixed-white"> Reporte Semanal</div>
+                        <a class=" fs-12" id="mes_seleccionado2"></a>
+                      </div>
                     </div>
                     <!-- ----------- grafica -------- -->
-                    <div class="card-body p-2">
+                    <div class="card-body">
                       <div class="row">
                         <div class="d-flex flex-wrap justify-content-evenly flex-fill">
                           <div class="m-sm-0 m-2">
-                            <span><b>Domingo</b></span> <div class="fw-semibold text-danger correo2-dia-semana-7"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Domingo</b></span> <div class="fw-semibold text-danger dia2-semana-7"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                           <div class="m-sm-0 m-2">
-                            <span><b>Lunes</b></span> <div class="fw-semibold mb-0 text-danger correo2-dia-semana-1"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Lunes</b></span> <div class="fw-semibold mb-0 text-danger dia2-semana-1"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                           <div class="m-sm-0 m-2">
-                            <span><b>Martes</b></span><div class="fe-semibold mb-0 text-danger correo2-dia-semana-2 "><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Martes</b></span><div class="fe-semibold mb-0 text-danger dia2-semana-2 "><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                           <div class="m-sm-0 m-2">
-                            <span><b>Miércoles</b></span> <div class="fw-semibold mb-0 text-danger correo2-dia-semana-3"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Miércoles</b></span> <div class="fw-semibold mb-0 text-danger dia2-semana-3"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                         </div>
                       </div>
                       <div class="row m-sm-3">
                         <div class="d-flex flex-wrap justify-content-evenly flex-fill">
                           <div class="m-sm-0 m-2">
-                            <span><b>Jueves</b></span> <div class="fw-semibold mb-0 text-danger correo2-dia-semana-4"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Jueves</b></span> <div class="fw-semibold mb-0 text-danger dia2-semana-4"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                           <div class="m-sm-0 m-2">
-                            <span><b>Viernes</b></span> <div class="fw-semibold mb-0 text-danger correo2-dia-semana-5"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Viernes</b></span> <div class="fw-semibold mb-0 text-danger dia2-semana-5"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                           <div class="m-sm-0 m-2">
-                            <span><b>Sábado</b></span> <div class="fw-semibold mb-0 text-danger correo2-dia-semana-6"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
+                            <span><b>Sábado</b></span> <div class="fw-semibold mb-0 text-danger dia2-semana-6"><div class="spinner-border w-20px h-20px" role="status"> </div></div>
                           </div>
                         </div>
                       </div>
@@ -231,32 +254,22 @@ if (!isset($_SESSION["user_nombre"])) {
                 </div>
 
                 <!-- ------------ REPORTE 24 HORAS -------------- -->
-                <div class="row">
-                  <div class="card custom-card overflow-hidden">
+                <div class="row scale-up-vertical-top2">
+                  <div class="card custom-card overflow-hidden" >
                     <div class="card-body">
                       <div class="d-flex align-items-top justify-content-between">
                         <div>
-                          <span class="avatar avatar-md avatar-rounded " style="background-color: #AB5FE3;">
+                          <span class="avatar avatar-md avatar-rounded bg-purple">
                             <i class="ti ti-users fs-16"></i>
                           </span>
                         </div>
-                        <div class="flex-fill ms-3">
-                          <div class="d-flex align-items-center justify-content-between flex-wrap">
-                            <div>
-                              <p class="text-muted mb-0">Últimas 24 Horas</p>
-                              <h4 class="fw-semibold mt-1" id="recientesW"> <!-- Datos 24H --> </h4>
-                            </div>
-                            <div id="crm-total-customers"></div>
-                          </div>
-                          <div class="d-flex align-items-center justify-content-between mt-1">
-                            <div>
-                              <!-- <a class="text-primary" href="javascript:void(0);">View All<i class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a> -->
-                            </div>
-                            <div class="text-end">
-                              <p class="mb-0 text-success fw-semibold" id="porsentajeW"></p>
-                              <span class="text-muted op-7 fs-11">este año</span>
-                            </div>
-                          </div>
+                        <div class="flex-fill ms-3" >
+                          <p class="text-muted mb-0">Últimas 24 Horas</p>
+                          <h4 class="fw-semibold mt-1" id="recientes_w"> <!-- Datos 24H --> </h4>
+                        </div>    
+                        <div class="col-4 text-end" >
+                          <div class="mb-0" id="porsentaje_w" style="color: black;"></div>
+                          <span class="mt-0">este mes</span>
                         </div>
                       </div>
                     </div>
@@ -264,39 +277,38 @@ if (!isset($_SESSION["user_nombre"])) {
                 </div>
               </div>
 
-              <!-- -------------- REPORTE MENSUAL ---------------- -->
-              <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+              <!-- ------------- REPORTE MENSUAL ---------------- -->
+              <div class="col-xxl-9 col-xl-5 col-lg-6 col-md-12 col-sm-12 scale-up-horizontal-left">
                 <div class="card custom-card">
                   <!-- ------- titulo ------- -->
                   <div class="card-header justify-content-between flex-wrap">
                     <div class="card-title"> Reporte Mensual </div>
+                    <a href="#" class="p-2 fs-12 text-muted" id="mesSeleccionado2"></a>
                   </div>
                   <!-- ----------- grafica -------- -->
                   <div class="card-body p-0">
-                    <div id="nft-statistics3" class="p-3 text-center">
+                    <div id="graf_linea_mes_wordpress" class="p-3 text-center">
                       <div class="spinner-border w-50px h-50px" role="status"> </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- --------------- REPORTE ANUAL ----------------- -->
-              <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-12 col-sm-12">
+              <!-- ------------- REPORTE ANUAL ------------------ -->
+              <div class="col-xxl-12 col-xl-5 col-lg-6 col-md-12 col-sm-12 scale-up-horizontal-left">
                 <div class="card custom-card">
                   <div class="card-header justify-content-between flex-wrap">
-                    <div class="card-title">Reporte Anual</div>  
+                    <div class="card-title">Reporte Anual</div> 
+                    <a class="p-2 fs-12 text-muted" id="anioSeleccionado2"></a>
                   </div>
                   <div class="card-body py-0">
-                    <div class="p-3 text-center" id="crm-profits-earned2"></div>
+                    <div class="p-3 text-center" id="graf_barra_anio_wordpress"></div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
           <!-- End::Selection Correo-2 -->
-
-
-          
 
         </div>
       </div>
@@ -318,7 +330,6 @@ if (!isset($_SESSION["user_nombre"])) {
 
     <!-- Apex Charts JS -->
     <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
-
 
     <script src="scripts/reportes_correo.js"></script>
 

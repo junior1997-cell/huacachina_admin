@@ -830,11 +830,11 @@ if (!isset($_SESSION["user_nombre"])) {
     <!-- Chartjs Chart JS -->
     <script src="../assets/libs/chart.js/chart.min.js"></script>
 
-    <!-- CRM-Dashboard -->
-    <!-- <script src="../assets/js/crm-dashboard.js"></script> -->
+     <!-- CRM-Dashboard  -->
+     <script src="../assets/js/crm-dashboard.js"></script> 
 
-    <!-- Custom JS -->
-    <!-- <script src="../assets/js/custom.js"></script> -->
+     <!-- Custom JS  -->
+     <script src="../assets/js/custom.js"></script> 
 
     <script src="scripts/reportes_correo.js"></script>
 

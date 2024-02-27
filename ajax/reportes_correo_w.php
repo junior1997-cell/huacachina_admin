@@ -13,7 +13,7 @@ if (!isset($_SESSION["user_nombre"])) {
 
     require_once "../modelos/Reportes_correo_w.php";
 
-    $reportes  = new Reportes_correo_w($_SESSION['idusuario']);
+    $reportes_w  = new Reportes_correo_w($_SESSION['idusuario']);
 
     date_default_timezone_set('America/Lima');
     $date_now = date("d_m_Y__h_i_s_A");
@@ -22,11 +22,18 @@ if (!isset($_SESSION["user_nombre"])) {
 
     switch ($_GET["op"]) {
 
-      case 'reporte_correo_w':    
-        $rspta = $reportes->reportes_wordpress('1568');
+      case 'reporte_correo_w':
+        $id = '1568';
+        $anio = isset($_POST['anio']) ? $_POST['anio'] : null;
+        $mes = isset($_POST['mes']) ? $_POST['mes'] : null;
+        $rspta = $reportes_w->reportes_wordpress($id, $anio, $mes);
         echo json_encode($rspta, true);    
       break; 
 
+      case 'list_anios_w':
+        $rspta = $reportes_w->listar('1568');
+        echo json_encode($rspta, true);
+        break;
 
       default:
         $rspta = ['status' => 'error_code', 'message' => 'Te has confundido en escribir en el <b>swich.</b>', 'data' => []];

@@ -22,10 +22,17 @@ if (!isset($_SESSION["user_nombre"])) {
 
     switch ($_GET["op"]) {
 
-      case 'reporte_correo_1':    
-        $rspta = $reportes->reportes_local();
+      case 'reporte_correo_1':
+        $anio = isset($_POST['anio']) ? $_POST['anio'] : null;
+        $mes = isset($_POST['mes']) ? $_POST['mes'] : null;    
+        $rspta = $reportes->reportes_local($anio, $mes);
         echo json_encode($rspta, true);    
       break; 
+
+      case 'list_anios':
+        $rspta = $reportes->listar();
+        echo json_encode($rspta, true);
+        break;
 
       
       default:
