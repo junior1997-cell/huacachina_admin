@@ -35,6 +35,8 @@ if (!isset($_SESSION["user_nombre"])) {
       <?php include("template/header.php") ?>
       <?php include("template/sidebar.php") ?>
 
+      <?php if($_SESSION['landing']==1) { ?>
+
       <!-- Start::app-content -->
       <div class="main-content app-content">
         <div class="container-fluid">
@@ -231,6 +233,9 @@ if (!isset($_SESSION["user_nombre"])) {
         </div>
       </div>
       <!-- End::app-content -->
+
+      <?php } else { $title_submodulo ='Diseño Landing'; $descripcion ='Diseño Landing del sistema!'; $title_modulo = 'Landing Page'; include("403_error.php"); }?>         
+
 
       <?php include("template/search_modal.php"); ?>
       <?php include("template/footer.php"); ?>

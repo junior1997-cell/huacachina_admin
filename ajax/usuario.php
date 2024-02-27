@@ -65,7 +65,7 @@ switch ($_GET["op"]) {
     $rspta = $usuario->validar_usuario($_GET["idusuario"], $_GET["login"]);
     //Codificar el resultado utilizando json
     echo json_encode($rspta, true);
-    break;
+  break;
 
 
   case 'listar':
@@ -105,7 +105,7 @@ switch ($_GET["op"]) {
     );
     echo json_encode($results);
 
-    break;
+  break;
 
 
   case 'select2persona':
@@ -129,7 +129,7 @@ switch ($_GET["op"]) {
     } else {
       echo json_encode($rspta, true);
     }
-    break;
+  break;
 
   case 'permisos':
     //Obtenemos todos los permisos de la tabla permisos
@@ -149,11 +149,11 @@ switch ($_GET["op"]) {
     //Mostramos la lista de permisos en la vista y si están o no marcados
     echo '<div class="row gy-2" >';
     foreach ($rspta['data']['agrupado'] as $key => $val1) {
-      echo '<div class="col-lg-3" >';
-      echo '<span>' . $val1['modulo'] . '</span>';
+      echo '<div class="col-lg-3 pt-3 pb-2" >';
+      echo '<span> <b>' . $val1['modulo'] . '</b></span>';
       foreach ($val1['submodulo'] as $key => $val2) {
         $sw = in_array($val2['idpermiso'], $valores) ? 'checked' : '';
-        echo '<div class="custom-toggle-switch d-flex align-items-center mb-1">
+        echo '<div class="custom-toggle-switch d-flex align-items-center mb-1 pt-1">
           <input id="permiso_' . $val2['idpermiso'] . '" name="permiso[]" type="checkbox" ' . $sw . ' value="' . $val2['idpermiso'] . '">
           <label for="permiso_' . $val2['idpermiso'] . '" class="label-primary"></label><span class="ms-3">' . $val2['submodulo'] . '</span>
         </div>';
@@ -161,7 +161,7 @@ switch ($_GET["op"]) {
       echo '</div>';
     }
     echo '</div>';
-    break;
+  break;
 
   case 'verificar':
 
@@ -203,10 +203,9 @@ switch ($_GET["op"]) {
       $_SESSION['user_imagen']    = $rspta['data']['imagen'];
       $_SESSION['user_login']     = $rspta['data']['login'];
 
-
       $marcados = $usuario->listarmarcados($rspta['data']['idusuario']);         # Obtenemos los permisos del usuario
       $grupo    = $usuario->listar_grupo_marcados($rspta['data']['idusuario']);  # Obtenemos los permisos del usuario
-      // $usuario->savedetalsesion($rspta['data']['idusuario']);                    # Guardamos los datos del usuario al iniciar sesion.
+      // $usuario->savedetalsesion($rspta['data']['idusuario']);                 # Guardamos los datos del usuario al iniciar sesion.
 
       $valores = array();           # Declaramos el array para almacenar todos los permisos marcados
       $valores_agrupado = array();  # Declaramos el array para almacenar todos los permisos marcados
@@ -220,23 +219,22 @@ switch ($_GET["op"]) {
       }  # Almacenamos los permisos marcados en el array
 
       //modulos
-      in_array('Landing Page', $valores_agrupado)           ? $_SESSION['landing_page'] = 1            : $_SESSION['landing_page']       = 0;
-      in_array('Correo Inicio', $valores_agrupado)          ? $_SESSION['correo_inicio'] = 1           : $_SESSION['correo_inicio']      = 0;
-      in_array('Adminstracion', $valores_agrupado)          ? $_SESSION['administracion'] = 1           : $_SESSION['administracion']      = 0;
+      in_array('Landing Page', $valores_agrupado)   ? $_SESSION['landing_page'] = 1    : $_SESSION['landing_page']    = 0;
+      in_array('Correo Inicio', $valores_agrupado)  ? $_SESSION['correo_inicio'] = 1   : $_SESSION['correo_inicio']   = 0;
+      in_array('Adminstracion', $valores_agrupado)  ? $_SESSION['administracion'] = 1  : $_SESSION['administracion']  = 0;
 
       // Inicio
-      in_array(1, $valores) ? $_SESSION['dashboard']           = 1 : $_SESSION['dashboard'] = 0;
+      in_array(1, $valores) ? $_SESSION['dashboard']         = 1 : $_SESSION['dashboard']       = 0;
       // Landing Page
-      in_array(2, $valores) ? $_SESSION['landing']             = 1 : $_SESSION['landing'] = 0;
-      in_array(3, $valores) ? $_SESSION['empresa']             = 1 : $_SESSION['empresa'] = 0;
-      in_array(4, $valores) ? $_SESSION['correo_landing']      = 1 : $_SESSION['correo_landing'] = 0;
+      in_array(2, $valores) ? $_SESSION['landing']           = 1 : $_SESSION['landing']         = 0;
+      in_array(3, $valores) ? $_SESSION['empresa']           = 1 : $_SESSION['empresa']         = 0;
+      in_array(4, $valores) ? $_SESSION['correo_landing']    = 1 : $_SESSION['correo_landing']  = 0;
       // Correo Inicio
-      in_array(5, $valores) ? $_SESSION['correo_wordpress']    = 1 : $_SESSION['correo_wordpress'] = 0;
+      in_array(5, $valores) ? $_SESSION['correo_wordpress']  = 1 : $_SESSION['correo_wordpress']= 0;
       // Adminstracion
-      in_array(6, $valores) ? $_SESSION['usuario']             = 1 : $_SESSION['usuario'] = 0;
-      in_array(7, $valores) ? $_SESSION['permisos']            = 1 : $_SESSION['permisos'] = 0;
-      in_array(8, $valores) ? $_SESSION['cargos']              = 1 : $_SESSION['cargos'] = 0;
-      in_array(9, $valores) ? $_SESSION['tipo_persona']        = 1 : $_SESSION['tipo_persona'] = 0;
+      in_array(6, $valores) ? $_SESSION['usuario']           = 1 : $_SESSION['usuario']         = 0;
+      in_array(7, $valores) ? $_SESSION['persona']          = 1 : $_SESSION['persona']        = 0;
+      
 
       $data = ['status' => true, 'message' => 'todo okey', 'data' => $rspta['data']];
       echo json_encode($data, true);

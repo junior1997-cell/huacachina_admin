@@ -17,7 +17,7 @@
       <?php include("template/sidebar.php"); ?>
 
       <!-- Start::app-content -->
-      <div class="main-content app-content">
+      <div class="main-content app-content"> 
         <div class="container-fluid">
           
           <?php $title_body = "Data Tables"; $subtitle_body = "Tables"; include("template/page-header.php") ?>

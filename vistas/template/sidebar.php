@@ -106,7 +106,7 @@
             <?php  if ($_SESSION['usuario'] == '1') { ?>
             <li class="slide"><a href="usuario.php" class="side-menu__item">Usuarios</a></li>     
             <?php } ?>       
-            <?php  if ($_SESSION['usuario'] == '1') { ?>
+            <?php  if ($_SESSION['persona'] == '1') { ?>
             <li class="slide"><a href="persona.php" class="side-menu__item">Persona</a></li>     
             <?php } ?>  
 

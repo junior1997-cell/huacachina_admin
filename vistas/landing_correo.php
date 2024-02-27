@@ -25,6 +25,8 @@
           <?php include("template/header.php") ?>
           <?php include("template/sidebar.php") ?>
 
+          <?php if($_SESSION['correo_landing']==1) { ?>
+
           <!-- Start::app-content -->
           <div class="main-content app-content">
             <div class="container-fluid">
@@ -144,6 +146,9 @@
             </div>
           </div>
           <!-- End::app-content -->
+
+          <?php } else { $title_submodulo ='Lista de correo!'; $descripcion ='Visualiza tus correos.'; $title_modulo = 'Landing Page'; include("403_error.php"); }?>         
+
 
           <div class="modal fade modal-effect" id="modal-agregar-usuario" tabindex="-1" aria-labelledby="modal-agregar-usuarioLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-scrollable">

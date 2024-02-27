@@ -12,7 +12,7 @@
 
       <head>
         
-        <?php $title_page = "Inicio"; include("template/head.php"); ?>    
+        <?php $title_page = "Persona"; include("template/head.php"); ?>    
 
       </head> 
 
@@ -25,77 +25,82 @@
           <?php include("template/header.php") ?>
           <?php include("template/sidebar.php") ?>
 
-          <!-- Start::app-content -->
-          <div class="main-content app-content">
-            <div class="container-fluid">
+          <?php if($_SESSION['persona']==1) { ?>
 
-              <!-- Start::page-header -->
-              <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-                <div>
-                  <div class="d-md-flex d-block align-items-center ">
-                    <button class="btn-modal-effect btn btn-primary label-btn m-r-10px" onclick="limpiar_form();" data-bs-effect="effect-super-scaled" data-bs-toggle="modal"  data-bs-target="#modal-agregar-persona"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
-                    <div>
-                      <p class="fw-semibold fs-18 mb-0">Lista de Personas del sistema!</p>
-                      <span class="fs-semibold text-muted">Administra de manera eficiente el registro de personas.</span>
-                    </div>                
-                  </div>
-                </div>
-                
-                <div class="btn-list mt-md-0 mt-2">              
-                  <nav>
-                    <ol class="breadcrumb mb-0">
-                      <li class="breadcrumb-item"><a href="javascript:void(0);">Pesona</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Administración</li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>          
-              <!-- End::page-header -->
+            <!-- Start::app-content -->
+            <div class="main-content app-content" >
+              <div class="container-fluid">
 
-              <!-- Start::row-1 -->
-              <div class="row">
-                <div class="col-xxl-12 col-xl-12">
-                  <div class="">
-                    <div class="card custom-card">                  
-                      <div class="card-body table-responsive">
-                        
-                        <table id="tabla-persona" class="table table-bordered w-100" style="width: 100%;">
-                          <thead>
-                            <tr>
-                              <th>Opciones</th>                          
-                              <th>Nombre</th>
-                              <th>Usuario</th>
-                              <th>Cargo</th>                          
-                              <th>Teléfono</th>
-                              <th>Email</th>
-                              <th>Estado</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <th>Opciones</th>                          
-                              <th>Nombre</th>
-                              <th>Usuario</th>
-                              <th>Cargo</th>                          
-                              <th>Teléfono</th>
-                              <th>Email</th>
-                              <th>Estado</th>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
-                    
+                <!-- Start::page-header -->
+                <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+                  <div>
+                    <div class="d-md-flex d-block align-items-center ">
+                      <button class="btn-modal-effect btn btn-primary label-btn m-r-10px" onclick="limpiar_form();" data-bs-effect="effect-super-scaled" data-bs-toggle="modal"  data-bs-target="#modal-agregar-persona"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
+                      <div>
+                        <p class="fw-semibold fs-18 mb-0">Lista de Personas del sistema!</p>
+                        <span class="fs-semibold text-muted">Administra de manera eficiente el registro de personas.</span>
+                      </div>                
                     </div>
                   </div>
-                </div>            
-              </div>
-              <!-- End::row-1 -->
+                  
+                  <div class="btn-list mt-md-0 mt-2">              
+                    <nav>
+                      <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Pesona</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Administración</li>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>          
+                <!-- End::page-header -->
 
+                <!-- Start::row-1 -->
+                <div class="row">
+                  <div class="col-xxl-12 col-xl-12">
+                    <div class="">
+                      <div class="card custom-card">                  
+                        <div class="card-body table-responsive">
+                          
+                          <table id="tabla-persona" class="table table-bordered w-100" style="width: 100%;">
+                            <thead>
+                              <tr>
+                                <th>Opciones</th>                          
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Cargo</th>                          
+                                <th>Teléfono</th>
+                                <th>Email</th>
+                                <th>Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <th>Opciones</th>                          
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Cargo</th>                          
+                                <th>Teléfono</th>
+                                <th>Email</th>
+                                <th>Estado</th>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      
+                      </div>
+                    </div>
+                  </div>            
+                </div>
+                <!-- End::row-1 -->
+
+              </div>
             </div>
-          </div>
-          <!-- End::app-content -->
+            <!-- End::app-content -->
+
+          <?php } else { $title_submodulo ='Persona'; $descripcion ='Lista de Personas del sistema!'; $title_modulo = 'Administracion'; include("403_error.php"); }?>         
+          
 
           <div class="modal fade modal-effect" id="modal-agregar-persona" tabindex="-1" aria-labelledby="modal-agregar-personaLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-scrollable">

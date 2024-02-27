@@ -25,6 +25,8 @@
           <?php include("template/header.php") ?>
           <?php include("template/sidebar.php") ?>
 
+          <?php if($_SESSION['empresa']==1) { ?>
+
           <!-- Start::app-content -->
           <div class="main-content app-content">
             <div class="container-fluid">
@@ -312,6 +314,9 @@
 
             </div>
           </div>
+
+          <?php } else { $title_submodulo ='Empresa'; $descripcion ='Empresa del sistema!'; $title_modulo = 'Landing Page'; include("403_error.php"); }?>         
+
           
           <div class="modal fade modal-effect" id="modal-agregar-mapa" tabindex="-1" aria-labelledby="modal-agregar-usuarioLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-scrollable">
