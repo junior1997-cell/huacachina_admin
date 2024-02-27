@@ -403,7 +403,7 @@
         <div class="main-header-dropdown header-shortcuts-dropdown dropdown-menu pb-0 dropdown-menu-end" aria-labelledby="notificationDropdown">
           <div class="p-3">
             <div class="d-flex align-items-center justify-content-between">
-              <p class="mb-0 fs-17 fw-semibold">Related Apps</p>
+              <p class="mb-0 fs-17 fw-semibold">Sobre: JDL Technology SAC</p>
             </div>
           </div>
           <div class="dropdown-divider mb-0"></div>
@@ -443,7 +443,7 @@
           </div>
           <div class="p-3 border-top">
             <div class="d-grid">
-              <a href="https://api.whatsapp.com/send?phone=+51921305769&text=Hola buenos dias, nesecito soporte sobre:" target="_blank" class="btn btn-primary">WhatsApp</a>
+              <a href="https://api.whatsapp.com/send?phone=+51921305769&text=Hola buenos dias, nesecito soporte sobre:" target="_blank" class="btn btn-success">WhatsApp</a>
             </div>
           </div>
         </div>
