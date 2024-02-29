@@ -55,7 +55,7 @@
               </a>
             </div>
             <p class="h3 fw-semibold mb-2" style="text-align: center; color: #f6f0b3;">Ingresar al sistema</p>
-            <p class="mb-3 op-7 fw-normal" style="text-align: center;  color: #ffff; font-size: 15px;">Bienvenido denuevo!</p>
+            <p class="mb-3 op-7 fw-normal" style="text-align: center;  color: #ffff; font-size: 15px;">Bienvenido de nuevo!</p>
             <!-- <div class="btn-list">
               <button class="btn btn-light"><svg class="google-svg" xmlns="http://www.w3.org/2000/svg" width="2443" height="2500" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
                   <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" />
@@ -72,11 +72,11 @@
             <form name="frmAcceso" id="frmAcceso" method="post">
               <div class="row gy-3">
                 <div class="col-xl-12 mt-0">
-                  <label for="logina" class="form-label text-default" style="color: #f6f0b3;">Usuario</label>
+                  <label for="logina" class="form-label text-white" >Usuario</label>
                   <input type="text" class="form-control form-control-lg" id="logina" placeholder="user name" required>
                 </div>
                 <div class="col-xl-12 mb-3">
-                  <label for="clavea" class="form-label text-default d-block" style="color: #f6f0b3;">Contraseña<a href="https://wa.link/oetgkf" target="_blank" class="float-end" style="color: #f6f0b3;" >Olvidaste tu contraseña ?</a></label>
+                  <label for="clavea" class="form-label text-white d-block" >Contraseña<a href="https://wa.link/oetgkf" target="_blank" class="float-end" style="color: #f6f0b3;" >Olvidaste tu contraseña ?</a></label>
                   <div class="input-group">
                     <input type="password" class="form-control form-control-lg" id="clavea" placeholder="password" required>
                     <button class="btn btn-light" type="button" onclick="createpassword('clavea',this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
@@ -91,7 +91,7 @@
                   </div>
                 </div>
                 <div class="col-xl-12 d-grid mt-2">
-                  <button type="submit" class="btn btn-lg btn-primary login-btn ">Iniciar sesion</button>
+                  <button type="submit" class="btn btn-lg btn-primary login-btn ">Iniciar sesión</button>
                 </div>
               </div>
             </form>
